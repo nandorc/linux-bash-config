@@ -1,0 +1,49 @@
+echo "" && error=0 && needrestart=0
+if [ -z $1 ]; then
+  echo ">>> ERROR: No option provided" && error=1
+fi
+
+if [ $error -eq 0 ]; then
+  if [ "$1" == "help" ]; then # Show help
+    echo "  bashcustomize help : Print this message"
+    echo "  bashcustomize list : Prints defined variables"
+    echo "  bashcustomize set [name] [value] : Set a customization variable, if no [value] provided is set to blank"
+    echo "  bashcustomize unset [name] : Unset (delete) a customization variable"
+  elif [ "$1" == "list" ]; then # List available variables
+    cat ~/.bash_customizations/vars.ini
+  elif [ "$1" == "set" ]; then # Set a new variable or updated an existing one
+    if [ -z $2 ]; then
+      echo ">>> ERROR: No name provided" && error=1
+    elif [ -z $(cat ~/.bash_customizations/vars.ini | grep "^$2=") ]; then
+      echo "$2=$3" >>~/.bash_customizations/vars.ini
+      echo ">>> INFO: $2 setted with value: $3" && needrestart=1
+    else
+      sed -i "s/$2=\(.*\)/$2=$3/g" ~/.bash_customizations/vars.ini
+      echo ">>> INFO: $2 updated with value: $3" && needrestart=1
+    fi
+  elif [ "$1" == "unset" ]; then # Delete a variable
+    if [ -z $2 ]; then
+      echo ">>> ERROR: No name provided" && error=1
+    elif [ -z $(cat ~/.bash_customizations/vars.ini | grep "^$2=") ]; then
+      echo ">>> INFO: $2 is not a defined variable"
+    else
+      sed -i "/^$2=/d" ~/.bash_customizations/vars.ini
+      echo ">>> INFO: $2 was deleted" && needrestart=1
+    fi
+  elif [ "$1" = "reset" ]; then
+    echo "custom_bash_gitflow=on" >~/.bash_customizations/vars.ini
+    echo ">>> INFO: Variables were set to default values"
+  else
+    echo ">>> ERROR: No valid option provided" && error=1
+  fi
+fi
+
+if [ $error -eq 0 ]; then
+  if [ $needrestart -eq 0 ]; then
+    echo ""
+  else
+    echo "" && echo ">>> INFO: You must restart to apply changes" && echo ""
+  fi
+else
+  echo ">>> Type 'bashcustomize help' to find out how it works" && echo "" && exit 1
+fi
