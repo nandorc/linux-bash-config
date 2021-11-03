@@ -1,0 +1,15 @@
+# Variables initialization
+if [ -f ~/.bash_customizations/vars.ini ]; then
+  source ~/.bash_customizations/vars.ini
+fi
+
+# GIT Customization
+if [ -n "$custom_bash_gitflow" ] && [ "$custom_bash_gitflow" == "on" ] && [ -f ~/.bash_customizations/customs/.custom_bash_gitflow ]; then
+  . ~/.bash_customizations/customs/.custom_bash_gitflow
+fi
+
+# Bash Customization Bin Folder
+if [ -d ~/.bash_customizations/bin ]; then
+  PATH="$PATH:~/.bash_customizations/bin"
+  export PATH
+fi
