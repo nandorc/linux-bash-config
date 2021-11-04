@@ -59,19 +59,19 @@ This tool allow users to manage files and folders permissions and ownership base
 >>
 >> If is set, it specify the linux user name as *ownername* to be used at **user:group** ownership assignment through `chown` command.
 >
->> `-group groupname`
+>> `-group [groupname]`
 >>
 >> If is set, it specify the linux group name as *groupname* to be used at **user:group** ownership assignment through `chown` command.
 >
->> `-file permission`
+>> `-file [permission]`
 >> 
 >> If is set, it modifies the default value assigned  for files when setting permissions. By default, files take **0664** permission.
 >
->> `-folder permission`
+>> `-folder [permission]`
 >> 
 >> If is set, it modifies the default value assigned  for folders when setting permissions. By default, folders take **2775** permission.
 >
->> `-exe permission`
+>> `-exe [permission]`
 >> 
 >> If is set, it modifies the default value assigned  for executable files when setting permissions. By default, executable files take **0774** permission.
 
