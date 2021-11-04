@@ -1,6 +1,6 @@
-# Read variables
-if [ -f ~/.bash_customizations/.custom_bash_config ]; then
-  . ~/.bash_customizations/.custom_bash_config
+# Read configuration
+if [ -f ~/.bash_customizations/config.sh ]; then
+  . ~/.bash_customizations/config.sh
 fi
 
 # To add additional aliases and configuration, you could use ~/.bash_aliases_extra file
