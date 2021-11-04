@@ -9,6 +9,8 @@ This repository is intended to provide a simple way to customize linux terminal 
 ## Features
 
 * Displays git information
+* Support quick access to apache webservice funcionalities
+* Autostart on login request for apache webservice
 * Provides support to additional configurations
 
 ## Additional Configuration Notes
