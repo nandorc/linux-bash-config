@@ -1,5 +1,6 @@
 /*.*
 !/.bash_customizations
+/.bash_customizations/vars.ini
 !/.bash_aliases
 !/.gitignore
 !/README.md
