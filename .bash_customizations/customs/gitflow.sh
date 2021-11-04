@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Show git branch name
 force_color_prompt=yes
 color_prompt=yes
