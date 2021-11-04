@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/.bash_customizations/utils/messages.sh
+source ~/.bash_utilities/lib/messages.sh
 
 function printHelp() {
   printMessage "BASHCUSTOMIZE COMMANDS HELP"

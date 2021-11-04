@@ -1,6 +1,6 @@
-# Read configuration
-if [ -f ~/.bash_customizations/config.sh ]; then
-  . ~/.bash_customizations/config.sh
+# Read Bash Utilities Configuration File
+if [ -f ~/.bash_utilities/src/config.sh ]; then
+  . ~/.bash_utilities/src/config.sh
 fi
 
 # To add additional aliases and configuration, you could use ~/.bash_aliases_extra file

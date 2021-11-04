@@ -1,0 +1,108 @@
+#!/bin/bash
+
+# >>> VARIABLES CAPTURE <<<
+while [ -n "$1" ]; do
+  case "$1" in
+  -owner)
+    ownername="$2"
+    shift
+    ;;
+  -group)
+    groupname="$2"
+    shift
+    ;;
+  -file)
+    filperm="$2"
+    shift
+    ;;
+  -folder)
+    dirperm="$2"
+    shift
+    ;;
+  -exe)
+    exeperm="$2"
+    shift
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *)
+    path="$1"
+    break
+    ;;
+  esac
+  shift
+done
+
+# >>> PATH VALIDATION <<<
+if [ -z $path ]; then
+  echo "A path to a file/folder must be specified to apply permissions"
+  exit 1
+else
+  if [ ! -d "$path" ]; then
+    if [ ! -f "$path" ]; then
+      echo "Not a file/folder existing path"
+      exit 1
+    fi
+  fi
+fi
+
+# >>> OWNERSHIP <<<
+if [ ! -z $ownername ]; then
+  if [ ! -z $groupname ]; then
+    echo ">>> SETTING $ownername as OWNER AND $groupname AS GROUP FOR $path"
+  else
+    echo ">>> SETTING OWNERSHIP TO $ownername FOR $path"
+    groupname=$ownername
+  fi
+  echo ""
+  sleep 1
+  sudo chown -R -c "$ownername":"$groupname" "$path"
+  echo ""
+else
+  if [ ! -z $groupname ]; then
+    echo ">>> SETTING $groupname AS GROUP FOR $path"
+    echo ""
+    sleep 1
+    sudo chown -R -c :"$groupname" "$path"
+    echo ""
+  fi
+fi
+
+# >>> EXECUTABLE FILES (0774 by default) <<<
+if [ -z $exeperm ]; then
+  exeperm=0774
+fi
+echo ">>> SETTING $exeperm PERMISSION TO EXECUTABLE FILES AT $path"
+echo ""
+sleep 1
+# Files without extension
+sudo find "$path" -type f ! -name "*.*" ! -perm "$exeperm" -exec chmod -c "$exeperm" {} +
+# .sh files
+sudo find "$path" -type f -name "*.sh" ! -perm "$exeperm" -exec chmod -c "$exeperm" {} +
+echo ""
+
+# >>> REGULAR FILES (0664 by default) <<<
+if [ -z $filperm ]; then
+  filperm=0664
+fi
+echo ">>> SETTING $filperm PERMISSION TO FILES AT $path"
+echo ""
+sleep 1
+sudo find "$path" -type f ! -perm "$exeperm" ! -perm "$filperm" -exec chmod -c "$filperm" {} +
+echo ""
+
+# >>> FOLDERS (2775 by default) <<<
+if [ -z $dirperm ]; then
+  dirperm=2775
+fi
+echo ">>> SETTING $dirperm PERMISSION TO FOLDERS AT $path"
+echo ""
+sleep 1
+sudo find "$path" -type d ! -perm "$dirperm" -exec chmod -c "$dirperm" {} +
+echo ""
+
+# >>> SCRIPT END MESSAGE <<<
+echo ">>> DONE"
+echo ""
