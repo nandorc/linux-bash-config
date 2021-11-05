@@ -33,4 +33,9 @@ if [ -n "$custom_bash_mysql_autostart" ] && [ "$custom_bash_mysql_autostart" == 
   . ~/.bash_utilities/src/bashcustomize/customs/mysql_autostart.sh
 fi
 
+# MySQL Customization - Variables and Alias
+if [ -n "$custom_bash_mysql" ] && [ "$custom_bash_mysql" == "on" ] && [ -f ~/.bash_utilities/src/bashcustomize/customs/mysql.sh ]; then
+  . ~/.bash_utilities/src/bashcustomize/customs/mysql.sh
+fi
+
 clear

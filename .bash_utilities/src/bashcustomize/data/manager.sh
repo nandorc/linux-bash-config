@@ -7,6 +7,7 @@ function setDefaultValues() {
   echo "custom_bash_gitflow=on" >~/.bash_utilities/src/bashcustomize/vars.ini
   echo "custom_bash_apache=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
   echo "custom_bash_apache_autostart=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
+  echo "custom_bash_mysql=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
   echo "custom_bash_mysql_autostart=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
 }
 
