@@ -10,11 +10,12 @@ This repository is intended to provide a simple way to customize linux terminal 
 
 * Displays git information
 * Support quick access to apache webservice funcionalities
-* Autostart on login request for apache webservice
+* Autostart on login request for apache service
+* Autostart on login request for mysql service
 * Management of files and folders permissions
 * Provides support to additional configurations
 
-## Additional Configuration Notes
+## Additional Configuration Note
 
 If you like to include extra features, aliases or on run scripts you must do it creating a new file. It must be `~/.bash_aliases_extra`
 
