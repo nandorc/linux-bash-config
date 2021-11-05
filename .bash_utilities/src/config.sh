@@ -28,4 +28,9 @@ if [ -n "$custom_bash_apache" ] && [ "$custom_bash_apache" == "on" ] && [ -f ~/.
   . ~/.bash_utilities/src/bashcustomize/customs/apache.sh
 fi
 
+# MySQL Customization - Autostart
+if [ -n "$custom_bash_mysql_autostart" ] && [ "$custom_bash_mysql_autostart" == "on" ] && [ -f ~/.bash_utilities/src/bashcustomize/customs/mysql_autostart.sh ]; then
+  . ~/.bash_utilities/src/bashcustomize/customs/mysql_autostart.sh
+fi
+
 clear
