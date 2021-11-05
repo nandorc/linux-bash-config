@@ -1,12 +1,13 @@
 #!/bin/bash
 
-source ~/.bash_customizations/data/helper.sh
-source ~/.bash_customizations/utils/messages.sh
+source ~/.bash_utilities/src/bashcustomize/data/helper.sh
+source ~/.bash_utilities/lib/messages.sh
 
 function setDefaultValues() {
-  echo "custom_bash_gitflow=on" >~/.bash_customizations/vars.ini
-  echo "custom_bash_apache=off" >>~/.bash_customizations/vars.ini
-  echo "custom_bash_apache_autostart=off" >>~/.bash_customizations/vars.ini
+  echo "custom_bash_gitflow=on" >~/.bash_utilities/src/bashcustomize/vars.ini
+  echo "custom_bash_apache=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
+  echo "custom_bash_apache_autostart=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
+  echo "custom_bash_mysql_autostart=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
 }
 
 function manageVariable() {
@@ -17,9 +18,9 @@ function manageVariable() {
     dispatchErrorMessage "No valid action to manage variables"
   elif [ -z "$2" ]; then
     dispatchErrorMessage "No variable name provided"
-  elif [ -z $(cat ~/.bash_customizations/vars.ini | grep "^$2=") ]; then
+  elif [ -z $(cat ~/.bash_utilities/src/bashcustomize/vars.ini | grep "^$2=") ]; then
     if [ "$1" = "set" ]; then
-      echo "$2=$3" >>~/.bash_customizations/vars.ini
+      echo "$2=$3" >>~/.bash_utilities/src/bashcustomize/vars.ini
       if [ -z "$3" ]; then
         dispatchResetNeedMessage "'$2' setted to empty value"
       else
@@ -30,14 +31,14 @@ function manageVariable() {
     fi
   else
     if [ "$1" = "set" ]; then
-      sed -i "s/$2=\(.*\)/$2=$3/g" ~/.bash_customizations/vars.ini
+      sed -i "s/$2=\(.*\)/$2=$3/g" ~/.bash_utilities/src/bashcustomize/vars.ini
       if [ -z "$3" ]; then
         dispatchResetNeedMessage "'$2' updated to empty value"
       else
         dispatchResetNeedMessage "'$2' updated. New value is '$3'"
       fi
     else
-      sed -i "/^$2=/d" ~/.bash_customizations/vars.ini
+      sed -i "/^$2=/d" ~/.bash_utilities/src/bashcustomize/vars.ini
       dispatchResetNeedMessage "'$2' was deleted"
     fi
   fi
@@ -45,6 +46,6 @@ function manageVariable() {
 
 function listVariables() {
   printMessage "DEFINED VARIABLES" 1
-  cat ~/.bash_customizations/vars.ini
+  cat ~/.bash_utilities/src/bashcustomize/vars.ini
   echo ""
 }
