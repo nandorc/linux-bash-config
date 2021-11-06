@@ -12,30 +12,39 @@ if [ ! -f ~/.bash_utilities/src/bashcustomize/vars.ini ]; then
   bashcustomize init
 fi
 source ~/.bash_utilities/src/bashcustomize/vars.ini
+source ~/.bash_utilities/src/bashcustomize/data/manager.sh
 
 # GIT Customization
-if [ -n "$custom_bash_gitflow" ] && [ "$custom_bash_gitflow" == "on" ] && [ -f ~/.bash_utilities/src/bashcustomize/customs/gitflow.sh ]; then
-  . ~/.bash_utilities/src/bashcustomize/customs/gitflow.sh
+if [ $(checkCustomization gitflow) -eq 1 ]; then
+  includeCustomization gitflow
 fi
 
-# Apache Customization - Autostart
-if [ -n "$custom_bash_apache_autostart" ] && [ "$custom_bash_apache_autostart" == "on" ] && [ -f ~/.bash_utilities/src/bashcustomize/customs/apache_autostart.sh ]; then
-  . ~/.bash_utilities/src/bashcustomize/customs/apache_autostart.sh
+# LAMP Customization - Autostart
+if [ $(checkCustomization lamp_autostart) -eq 1 ]; then
+  includeCustomization lamp_autostart
+else
+  # Apache Customization - Autostart
+  if [ $(checkCustomization apache_autostart) -eq 1 ]; then
+    includeCustomization apache_autostart
+  fi
+  # MySQL Customization - Autostart
+  if [ $(checkCustomization mysql_autostart) -eq 1 ]; then
+    includeCustomization mysql_autostart
+  fi
 fi
 
-# Apache Customization - Variables and Alias
-if [ -n "$custom_bash_apache" ] && [ "$custom_bash_apache" == "on" ] && [ -f ~/.bash_utilities/src/bashcustomize/customs/apache.sh ]; then
-  . ~/.bash_utilities/src/bashcustomize/customs/apache.sh
-fi
-
-# MySQL Customization - Autostart
-if [ -n "$custom_bash_mysql_autostart" ] && [ "$custom_bash_mysql_autostart" == "on" ] && [ -f ~/.bash_utilities/src/bashcustomize/customs/mysql_autostart.sh ]; then
-  . ~/.bash_utilities/src/bashcustomize/customs/mysql_autostart.sh
-fi
-
-# MySQL Customization - Variables and Alias
-if [ -n "$custom_bash_mysql" ] && [ "$custom_bash_mysql" == "on" ] && [ -f ~/.bash_utilities/src/bashcustomize/customs/mysql.sh ]; then
-  . ~/.bash_utilities/src/bashcustomize/customs/mysql.sh
+# LAMP Customization - Variables and Alias
+if [ $(checkCustomization lamp) -eq 1 ]; then
+  includeCustomization lamp
+else
+  # Apache Customization - Variables and Alias
+  if [ $(checkCustomization apache) -eq 1 ]; then
+    includeCustomization apache
+  fi
+  # MySQL Customization - Variables and Alias
+  if [ $(checkCustomization mysql) -eq 1 ]; then
+    includeCustomization mysql
+  fi
 fi
 
 clear
