@@ -11,6 +11,7 @@ This repository is intended to provide a simple way to customize linux terminal 
 * Displays git information
 * Quick access to apache webservice funcionalities
 * Autostart on login request for apache service
+* Quick access to mysql service funcionalities
 * Autostart on login request for mysql service
 * Management of files and folders permissions
 * Provides support to additional configurations
