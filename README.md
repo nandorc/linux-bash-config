@@ -13,6 +13,8 @@ This repository is intended to provide a simple way to customize linux terminal 
 * Autostart on login request for apache service
 * Quick access to mysql service funcionalities
 * Autostart on login request for mysql service
+* Quick access to lamp server funcionalities
+* Autostart on login request for lamp server
 * Management of files and folders permissions
 * Provides support to additional configurations
 
