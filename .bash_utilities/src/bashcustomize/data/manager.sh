@@ -14,6 +14,8 @@ function setDefaultValues() {
   echo "custom_bash_elasticsearch=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
   echo "custom_bash_elasticsearch_path=" >>~/.bash_utilities/src/bashcustomize/vars.ini
   echo "custom_bash_elasticsearch_autostart=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
+  echo "custom_bash_magento=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
+  echo "custom_bash_magento_autostart=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
 }
 
 function manageVariable() {

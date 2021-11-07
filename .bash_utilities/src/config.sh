@@ -17,34 +17,6 @@ if [ $(checkCustomization gitflow) -eq 1 ]; then
   includeCustomization gitflow
 fi
 
-# LAMP Customization - Autostart
-if [ $(checkCustomization lamp_autostart) -eq 1 ]; then
-  includeCustomization lamp_autostart
-else
-  # Apache Customization - Autostart
-  if [ $(checkCustomization apache_autostart) -eq 1 ]; then
-    includeCustomization apache_autostart
-  fi
-  # MySQL Customization - Autostart
-  if [ $(checkCustomization mysql_autostart) -eq 1 ]; then
-    includeCustomization mysql_autostart
-  fi
-fi
-
-# LAMP Customization - Variables and Alias
-if [ $(checkCustomization lamp) -eq 1 ]; then
-  includeCustomization lamp
-else
-  # Apache Customization - Variables and Alias
-  if [ $(checkCustomization apache) -eq 1 ]; then
-    includeCustomization apache
-  fi
-  # MySQL Customization - Variables and Alias
-  if [ $(checkCustomization mysql) -eq 1 ]; then
-    includeCustomization mysql
-  fi
-fi
-
 # Elasticsearch Customization - Flag
 custom_bash_elasticsearch_flag=0
 if [ -n "$custom_bash_elasticsearch_path" ]; then
@@ -54,20 +26,56 @@ if [ -n "$custom_bash_elasticsearch_path" ]; then
     fi
     custom_bash_elasticsearch_flag=1
   else
-    printWarningMessage "No existing /bin folder inside elasticsearch_path. Skipping 'elasticsearch' and 'elasticsearch_autostart' customizations due to no /bin folder found." 1 && sleep 5
+    printWarningMessage "No existing /bin folder inside elasticsearch_path. Skipping 'elasticsearch', 'elasticsearch_autostart', 'magento' and 'magento_autostart' customizations due to no /bin folder found." 1 && sleep 5
   fi
-elif [ $(checkCustomization elasticsearch) -eq 1 ] || [ $(checkCustomization elasticsearch_autostart) -eq 1 ]; then
-  printWarningMessage "No elasticsearch path defined. Use 'bashcustomize set custom_bash_elasticsearch_path path' to define it. Skipping 'elasticsearch' and 'elasticsearch_autostart' customizations due to no path defined." 1 && sleep 5
+elif [ $(checkCustomization elasticsearch) -eq 1 ] || [ $(checkCustomization elasticsearch_autostart) -eq 1 ] || [ $(checkCustomization magento) -eq 1 ] || [ $(checkCustomization magento_autostart) -eq 1 ]; then
+  printWarningMessage "No elasticsearch path defined. Use 'bashcustomize set custom_bash_elasticsearch_path path' to define it. Skipping 'elasticsearch', 'elasticsearch_autostart', 'magento' and 'magento_autostart' customizations due to no path defined." 1 && sleep 5
 fi
 
-# Elasticsearch Customization - Autostart
-if [ $custom_bash_elasticsearch_flag -eq 1 ] && [ $(checkCustomization elasticsearch_autostart) -eq 1 ]; then
-  includeCustomization elasticsearch_autostart
+# Magento Customization - Autostart
+if [ $custom_bash_elasticsearch_flag -eq 1 ] && [ $(checkCustomization magento_autostart) -eq 1 ]; then
+  includeCustomization magento_autostart
+else
+  # LAMP Customization - Autostart
+  if [ $(checkCustomization lamp_autostart) -eq 1 ]; then
+    includeCustomization lamp_autostart
+  else
+    # Apache Customization - Autostart
+    if [ $(checkCustomization apache_autostart) -eq 1 ]; then
+      includeCustomization apache_autostart
+    fi
+    # MySQL Customization - Autostart
+    if [ $(checkCustomization mysql_autostart) -eq 1 ]; then
+      includeCustomization mysql_autostart
+    fi
+  fi
+  # Elasticsearch Customization - Autostart
+  if [ $custom_bash_elasticsearch_flag -eq 1 ] && [ $(checkCustomization elasticsearch_autostart) -eq 1 ]; then
+    includeCustomization elasticsearch_autostart
+  fi
 fi
 
-# Elasticsearch Customization - Variables and Alias
-if [ $custom_bash_elasticsearch_flag -eq 1 ] && [ $(checkCustomization elasticsearch) -eq 1 ]; then
-  includeCustomization elasticsearch
+# Magento Customization - Variables and Alias
+if [ $custom_bash_elasticsearch_flag -eq 1 ] && [ $(checkCustomization magento) -eq 1 ]; then
+  includeCustomization magento
+else
+  # LAMP Customization - Variables and Alias
+  if [ $(checkCustomization lamp) -eq 1 ]; then
+    includeCustomization lamp
+  else
+    # Apache Customization - Variables and Alias
+    if [ $(checkCustomization apache) -eq 1 ]; then
+      includeCustomization apache
+    fi
+    # MySQL Customization - Variables and Alias
+    if [ $(checkCustomization mysql) -eq 1 ]; then
+      includeCustomization mysql
+    fi
+  fi
+  # Elasticsearch Customization - Variables and Alias
+  if [ $custom_bash_elasticsearch_flag -eq 1 ] && [ $(checkCustomization elasticsearch) -eq 1 ]; then
+    includeCustomization elasticsearch
+  fi
 fi
 
 export PATH
