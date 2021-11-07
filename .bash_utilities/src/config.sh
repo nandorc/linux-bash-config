@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # Bash Utilities Bin Folder
-if [ -d ~/.bash_utilities/bin ]; then
-  PATH="$PATH:~/.bash_utilities/bin"
-  export PATH
-fi
+PATH="$PATH:~/.bash_utilities/bin"
 
 # BASH CUSTOMIZE
 ## Variables initialization
@@ -13,6 +10,7 @@ if [ ! -f ~/.bash_utilities/src/bashcustomize/vars.ini ]; then
 fi
 source ~/.bash_utilities/src/bashcustomize/vars.ini
 source ~/.bash_utilities/src/bashcustomize/data/manager.sh
+source ~/.bash_utilities/lib/messages.sh
 
 # GIT Customization
 if [ $(checkCustomization gitflow) -eq 1 ]; then
@@ -47,4 +45,30 @@ else
   fi
 fi
 
+# Elasticsearch Customization - Flag
+custom_bash_elasticsearch_flag=0
+if [ -n "$custom_bash_elasticsearch_path" ]; then
+  if [ -d "$custom_bash_elasticsearch_path"/bin ]; then
+    if [[ ! "$PATH" =~ "$custom_bash_elasticsearch_path" ]]; then
+      PATH="$PATH:$custom_bash_elasticsearch_path/bin"
+    fi
+    custom_bash_elasticsearch_flag=1
+  else
+    printWarningMessage "No existing /bin folder inside elasticsearch_path. Skipping 'elasticsearch' and 'elasticsearch_autostart' customizations due to no /bin folder found." 1 && sleep 5
+  fi
+elif [ $(checkCustomization elasticsearch) -eq 1 ] || [ $(checkCustomization elasticsearch_autostart) -eq 1 ]; then
+  printWarningMessage "No elasticsearch path defined. Use 'bashcustomize set custom_bash_elasticsearch_path path' to define it. Skipping 'elasticsearch' and 'elasticsearch_autostart' customizations due to no path defined." 1 && sleep 5
+fi
+
+# Elasticsearch Customization - Autostart
+if [ $custom_bash_elasticsearch_flag -eq 1 ] && [ $(checkCustomization elasticsearch_autostart) -eq 1 ]; then
+  includeCustomization elasticsearch_autostart
+fi
+
+# Elasticsearch Customization - Variables and Alias
+if [ $custom_bash_elasticsearch_flag -eq 1 ] && [ $(checkCustomization elasticsearch) -eq 1 ]; then
+  includeCustomization elasticsearch
+fi
+
+export PATH
 clear

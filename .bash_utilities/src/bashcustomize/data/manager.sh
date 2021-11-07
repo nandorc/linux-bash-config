@@ -11,6 +11,9 @@ function setDefaultValues() {
   echo "custom_bash_mysql_autostart=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
   echo "custom_bash_lamp=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
   echo "custom_bash_lamp_autostart=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
+  echo "custom_bash_elasticsearch=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
+  echo "custom_bash_elasticsearch_path=" >>~/.bash_utilities/src/bashcustomize/vars.ini
+  echo "custom_bash_elasticsearch_autostart=off" >>~/.bash_utilities/src/bashcustomize/vars.ini
 }
 
 function manageVariable() {
