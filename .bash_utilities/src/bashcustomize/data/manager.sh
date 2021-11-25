@@ -16,6 +16,8 @@ function setDefaultValues() {
   manageVariable -q set elasticsearch_autostart off
   manageVariable -q set magento off
   manageVariable -q set magento_autostart off
+  manageVariable -q set docker off
+  manageVariable -q set docker_autostart off
 }
 
 function listVariables() {
