@@ -19,6 +19,8 @@ This repository is intended to provide a simple way to customize linux terminal 
 * Autostart on login for elasticsearch service
 * Quick access to magento server funcionalities
 * Autostart on login request for magento server
+* Quick access to docker service funcionalities
+* Autostart on login request for docker service
 * Management of files and folders permissions
 * Provides support to additional configurations
 
