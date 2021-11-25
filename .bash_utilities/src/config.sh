@@ -78,5 +78,15 @@ else
   fi
 fi
 
+# Docker Customization - Autostart
+if [ $(checkCustomization docker_autostart) -eq 1 ]; then
+  includeCustomization docker_autostart
+fi
+
+# Docker Customization - Variables and Alias
+if [ $(checkCustomization docker) -eq 1 ]; then
+  includeCustomization docker
+fi
+
 export PATH
 clear
