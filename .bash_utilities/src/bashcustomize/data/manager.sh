@@ -5,6 +5,7 @@ source ~/.bash_utilities/lib/messages.sh
 
 function setDefaultValues() {
   manageVariable -q set gitflow on
+  manageVariable -q set wsl off
   manageVariable -q set apache off
   manageVariable -q set apache_autostart off
   manageVariable -q set mysql off
