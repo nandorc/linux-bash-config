@@ -17,6 +17,11 @@ if [ $(checkCustomization gitflow) -eq 1 ]; then
   includeCustomization gitflow
 fi
 
+# WSL Customization
+if [ $(checkCustomization wsl) -eq 1 ]; then
+  includeCustomization wsl
+fi
+
 # Elasticsearch Customization - Flag
 custom_bash_elasticsearch_flag=0
 if [ -n "$custom_bash_elasticsearch_path" ]; then
