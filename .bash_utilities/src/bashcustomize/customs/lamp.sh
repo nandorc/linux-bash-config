@@ -1,11 +1,12 @@
 #!/bin/bash
 
 source ~/.bash_utilities/src/bashcustomize/data/manager.sh
+source ~/.bash_utilities/lib/messages.sh
 
 includeCustomization apache
 includeCustomization mysql
 
 # LAMP Service
-alias lamp_start="webserver_start && mysql_start"
-alias lamp_stop="webserver_stop && mysql_stop"
-alias lamp_restart="webserver_restart && mysql_restart"
+alias lamp_start="printInfoMessage 'Starting LAMP services.' before && webserver_start && mysql_start && printInfoMessage 'LAMP services running.' after"
+alias lamp_stop="printInfoMessage 'Stopping LAMP services.' before && webserver_stop && mysql_stop && printInfoMessage 'LAMP services stopped.' after"
+alias lamp_restart="printInfoMessage 'Restarting LAMP services.' before && webserver_restart && mysql_restart && printInfoMessage 'LAMP services restarted.' after"

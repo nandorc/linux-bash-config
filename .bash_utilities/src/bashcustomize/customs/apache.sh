@@ -1,11 +1,13 @@
 #!/bin/bash
 
+source ~/.bash_utilities/lib/messages.sh
+
 # Apache webserver
 webserver_path="/var/www"
 alias webserver_path="cd $webserver_path"
-alias webserver_start="sudo service apache2 start"
-alias webserver_stop="sudo service apache2 stop"
-alias webserver_restart="sudo service apache2 restart"
+alias webserver_start="printInfoMessage 'Starting apache service.' before && sudo service apache2 start && printInfoMessage 'Apache service started.' after"
+alias webserver_stop="printInfoMessage 'Stopping apache service.' before && sudo service apache2 stop && printInfoMessage 'Apache service stopped.' after"
+alias webserver_restart="printInfoMessage 'Restarting apache service.' before && sudo service apache2 restart && printInfoMessage 'Apache service restarted.' after"
 
 # Localhost
 localhost_path="$webserver_path/html"
