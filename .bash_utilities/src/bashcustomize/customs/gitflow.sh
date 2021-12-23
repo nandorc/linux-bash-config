@@ -1,5 +1,9 @@
 #!/bin/bash
 
+source ~/.bash_utilities/lib/messages.sh
+
+printInfoMessage "Setting up Git support..."
+
 # Show git branch name
 force_color_prompt=yes
 color_prompt=yes
@@ -42,3 +46,5 @@ else
 fi
 
 unset color_prompt force_color_prompt
+
+printInfoMessage "Git support setted up."
