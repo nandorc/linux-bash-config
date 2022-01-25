@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/.bash_utilities/lib/messages.sh
+source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 
 # Apache webserver
 webserver_path="/var/www"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source ~/.bash_utilities/src/bashcustomize/data/manager.sh
-source ~/.bash_utilities/lib/messages.sh
+source ~/.bash_utilities/src/bashcustomizer/lib/local/customshandler.sh
+source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 
 includeCustomization lamp
 includeCustomization elasticsearch

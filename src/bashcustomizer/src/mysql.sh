@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/.bash_utilities/lib/messages.sh
+source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 
 # MySQL service
 alias mysql_start="printInfoMessage 'Starting mysql service.' before && sudo service mysql start && printInfoMessage 'MySQL service started.' after"

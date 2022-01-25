@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/.bash_utilities/lib/messages.sh
+source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 
 # Docker Service
 alias docker_start="printInfoMessage 'Starting docker service.' before && sudo service docker start && printInfoMessage 'Docker service started.' after"

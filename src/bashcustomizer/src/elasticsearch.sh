@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/.bash_utilities/src/bashcustomize/lib/elasticsearch.sh
+source ~/.bash_utilities/src/bashcustomizer/lib/local/elasticsearch.sh
 
 alias elasticsearch_start="startElasticsearchService both"
 alias elasticsearch_stop="stopElasticSearchService both"
