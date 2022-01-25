@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Load dependencies
 source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 
 # $1 input spacing
