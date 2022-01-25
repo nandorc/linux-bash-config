@@ -4,21 +4,18 @@
 source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 source ~/.bash_utilities/lib/ext/dsoft/inihandler.sh
 
-# source ~/.bash_utilities/src/bashcustomize/data/manager.sh
-
 if [ "$1" == "help" ]; then
     mdv ~/.bash_utilities/src/bashcustomizer/README.md
 elif [ "$1" == "list" ]; then
     getAllINIVars ~/.bash_utilities/src/bashcustomizer/etc/vars.ini
 elif [ "$1" == "set" ]; then
     ~/.bash_utilities/src/bashcustomizer/cmd/manage.sh set "$2" "$3"
-elif [ "$1" == "unset" ]; then # Delete a variable
+elif [ "$1" == "unset" ]; then
     ~/.bash_utilities/src/bashcustomizer/cmd/manage.sh unset "$2"
-# elif [ "$1" = "reset" ]; then
-#   setDefaultValues
-#   dispatchResetNeedMessage "Variables were set to default values"
-# elif [ "$1" = "init" ]; then
-#   setDefaultValues
+elif [ "$1" = "reset" ]; then
+    ~/.bash_utilities/src/bashcustomizer/cmd/reset.sh
+elif [ "$1" = "init" ]; then
+    ~/.bash_utilities/src/bashcustomizer/cmd/reset.sh -q
 else
     printErrorMessage "No valid option provided for bashcustomizer." before
     printWarningMessage "Try 'bashcustomizer help' to look for available commands." after

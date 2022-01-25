@@ -28,6 +28,8 @@ fi
 function printResetNeedMessage() {
     if [ ! -z "$1" ]; then
         printInfoMessage "$1" before
+    else
+        printInfoMessage "Opreation completed." before
     fi
     printMessage "You must restart to apply changes." after
 }
