@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Load dependencies
+source ~/.bash_utilities/lib/ext/dsoft/messages.sh
+
+# Manage utility parameters
+if [ "$1" = "--help" ]; then
+    ~/.bash_utilities/src/mdv/cmd/display.sh ~/.bash_utilities/src/mdv/README.md
+elif [ "$1" = "--reset" ]; then
+    ~/.bash_utilities/src/mdv/cmd/reset.sh
+elif [ ! -z "$1" ]; then
+    ~/.bash_utilities/src/mdv/cmd/display.sh "$1"
+else
+    printErrorMessage "No valid option provided for mdv." before
+    printWarningMessage "Try 'mdv --help' to look for available options." after
+fi
