@@ -7,7 +7,7 @@ source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 # source ~/.bash_utilities/src/bashcustomize/data/manager.sh
 
 if [ "$1" == "help" ]; then
-    echo "Print help"
+    mdv ~/.bash_utilities/src/bashcustomizer/README.md
 # elif [ "$1" == "list" ]; then # List available variables
 #   listVariables
 # elif [ "$1" == "set" ]; then # Set a new variable or updated an existing one
