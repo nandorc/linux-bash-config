@@ -10,7 +10,7 @@ printMessage "Reading bashcustomizer variables..."
 if [ ! -f ~/.bash_utilities/src/bashcustomizer/etc/vars.ini ]; then
     bashcustomizer init
 fi
-printMessage "Variables readed."
+printMessage "done"
 
 # GIT Customization
 bc_gitflow=$(checkCustomization gitflow)
