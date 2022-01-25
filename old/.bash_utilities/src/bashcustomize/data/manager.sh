@@ -21,16 +21,6 @@ function setDefaultValues() {
   manageVariable -q set docker_autostart off
 }
 
-function listVariables() {
-  if [ ! -f ~/.bash_utilities/src/bashcustomize/vars.ini ]; then
-    printWarningMessage "No file found holding any variable. Set a new variable using 'bashcustomize set [name] [value]' or use 'bashcustomize reset' to create it." 1
-  else
-    printMessage "DEFINED VARIABLES" 1
-    cat ~/.bash_utilities/src/bashcustomize/vars.ini
-    echo ""
-  fi
-}
-
 function checkCustomization() {
   # $1 customization variable name without prefix
   var="custom_bash_$1"
