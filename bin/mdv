@@ -1,7 +1,14 @@
 #!/bin/bash
 
+# Load dependencies
+source ~/.bash_utilities/lib/ext/dsoft/messages.sh
+
+# Manage utility parameters
 if [ "$1" = "--help" ]; then
     echo "print help"
+else
+    printErrorMessage "No valid option provided for mdv." before
+    printWarningMessage "Try 'mdv --help' to look for available options." after
 fi
 
 # source .tools/lib/inihandler.sh
