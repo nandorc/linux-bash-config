@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# # Load dependencies
-# source ~/.bash_utilities/lib/ext/dsoft/messages.sh
-
-# # BASH CUSTOMIZE
+# Load dependencies
+source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 
 # ## Variables initialization
 # if [ ! -f ~/.bash_utilities/src/bashcustomize/vars.ini ]; then
@@ -11,7 +9,6 @@
 # fi
 # source ~/.bash_utilities/src/bashcustomize/vars.ini
 # source ~/.bash_utilities/src/bashcustomize/data/manager.sh
-# source ~/.bash_utilities/lib/messages.sh
 
 # ## GIT Customization
 # if [ $(checkCustomization gitflow) -eq 1 ]; then

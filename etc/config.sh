@@ -9,8 +9,8 @@ printInfoMessage "Loading Bash Utilities system..."
 # Include Bash Utilities bin folder to path
 PATH="$PATH:~/.bash_utilities/bin"
 
-# Load bashcustomize configuration
-. ~/.bash_utilities/src/bashcustomize/etc/config.sh
+# Load bashcustomizer configuration
+. ~/.bash_utilities/src/bashcustomizer/etc/config.sh
 
 # Finish and print post init warning
 printInfoMessage "Bash Utilities system loaded."
