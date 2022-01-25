@@ -7,7 +7,7 @@ source ~/.bash_utilities/lib/ext/dsoft/inihandler.sh
 # Read or initialize variables
 printMessage "Reading bashcustomizer variables..."
 if [ ! -f ~/.bash_utilities/src/bashcustomizer/etc/vars.ini ]; then
-  bashcustomize init
+  bashcustomizer init
 fi
 # source ~/.bash_utilities/src/bashcustomize/vars.ini
 # source ~/.bash_utilities/src/bashcustomize/data/manager.sh
