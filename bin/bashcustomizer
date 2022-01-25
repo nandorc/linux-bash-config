@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Load dependencies
+source ~/.bash_utilities/lib/ext/dsoft/messages.sh
+
+# source ~/.bash_utilities/src/bashcustomize/data/helper.sh
+# source ~/.bash_utilities/src/bashcustomize/data/manager.sh
+
+if [ "$1" == "help" ]; then
+    echo "Print help"
+# elif [ "$1" == "list" ]; then # List available variables
+#   listVariables
+# elif [ "$1" == "set" ]; then # Set a new variable or updated an existing one
+#   manageVariable set "$2" "$3"
+# elif [ "$1" == "unset" ]; then # Delete a variable
+#   manageVariable unset "$2"
+# elif [ "$1" = "reset" ]; then
+#   setDefaultValues
+#   dispatchResetNeedMessage "Variables were set to default values"
+# elif [ "$1" = "init" ]; then
+#   setDefaultValues
+else
+    printErrorMessage "No valid option provided for bashcustomizer." before
+    printWarningMessage "Try 'bashcustomizer help' to look for available commands." after
+fi
