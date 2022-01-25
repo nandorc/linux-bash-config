@@ -2,11 +2,13 @@
 
 # Load dependencies
 source ~/.bash_utilities/lib/ext/dsoft/messages.sh
+source ~/.bash_utilities/lib/ext/dsoft/inihandler.sh
 
-# ## Variables initialization
-# if [ ! -f ~/.bash_utilities/src/bashcustomize/vars.ini ]; then
-#   bashcustomize init
-# fi
+# Read or initialize variables
+printMessage "Reading bashcustomizer variables..."
+if [ ! -f ~/.bash_utilities/src/bashcustomizer/etc/vars.ini ]; then
+  bashcustomize init
+fi
 # source ~/.bash_utilities/src/bashcustomize/vars.ini
 # source ~/.bash_utilities/src/bashcustomize/data/manager.sh
 
