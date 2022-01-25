@@ -15,18 +15,18 @@ parse_git_branch() {
   stillcherrypicking=$(git status 2>/dev/null | grep 'cherry-picking')
   if [ ! -z "$branchname" ]; then
     if [ ! -z "$mergeconflict" ]; then
-      echo "($branchname | Merging | Unmerged paths)"
+      echo "$branchname | Merging | Unmerged paths"
     else
       if [ ! -z "$stillmerging" ]; then
-        echo "($branchname | Merging | Ready to finish)"
+        echo "$branchname | Merging | Ready to finish"
       else
         if [ ! -z "$cherrypickconflict" ]; then
-          echo "($branchname | Cherry-Picking | Unmerged paths)"
+          echo "$branchname | Cherry-Picking | Unmerged paths"
         else
           if [ ! -z "$stillcherrypicking" ]; then
-            echo "($branchname | Cherry-Picking | Ready to finish)"
+            echo "$branchname | Cherry-Picking | Ready to finish"
           else
-            echo "($branchname)"
+            echo "$branchname"
           fi
         fi
       fi
