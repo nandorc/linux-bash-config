@@ -1,13 +1,10 @@
 #!/bin/bash
 
+# Dependencies
 source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
 
+# Load variables
 wrapFileInclusion "Including apache variables..." "~/.bash_utilities/src/bashcustomizer/src/apache/variables.sh"
+# Load aliases
 wrapFileInclusion "Including apache aliases..." "~/.bash_utilities/src/bashcustomizer/src/apache/aliases.sh"
-
-# # Localhost
-# localhost_path="$webserver_path/html"
-# localhost_url="http://localhost"
-# alias localhost="explorer.exe $localhost_url"
-# alias localhost_path="cd $localhost_path"
