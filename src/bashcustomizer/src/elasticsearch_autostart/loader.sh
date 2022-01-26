@@ -1,11 +1,12 @@
 #!/bin/bash
 
+# Load dependencies
 source ~/.bash_utilities/lib/ext/dsoft/messages.sh
-source ~/.bash_utilities/src/bashcustomizer/lib/local/elasticsearch.sh
+source ~/.bash_utilities/src/bashcustomizer/src/elasticsearch/commands.sh
+source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
 
-mustSkip=0
-isRunning=0
-triesCount=0
+# Check service loading
+mustSkip=0 && isRunning=0 && triesCount=0
 printMessage "Checking elasticsearch service..."
 while [ $mustSkip -eq 0 ]; do
     triesCount=$(($triesCount + 1))
@@ -17,9 +18,8 @@ while [ $mustSkip -eq 0 ]; do
     fi
 done
 if [ $isRunning -eq 0 ]; then
-    printMessage "Elasticsearch service is stopped."
-    startElasticsearchService
+    wrapCommand 'Starting elasticsearch service...' 'startElasticsearchService'
 else
-    printMessage "Elasticsearch service is running."
+    printMessage "done"
 fi
 unset triesCount mustSkip isRunning
