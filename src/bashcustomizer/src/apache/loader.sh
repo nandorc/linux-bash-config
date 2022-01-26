@@ -3,7 +3,8 @@
 source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
 
-wrapFileInclusion "Including apache variables" "~/.bash_utilities/src/bashcustomizer/src/apache/variables.sh"
+wrapFileInclusion "Including apache variables..." "~/.bash_utilities/src/bashcustomizer/src/apache/variables.sh"
+wrapFileInclusion "Including apache aliases..." "~/.bash_utilities/src/bashcustomizer/src/apache/aliases.sh"
 
 # # Localhost
 # localhost_path="$webserver_path/html"
