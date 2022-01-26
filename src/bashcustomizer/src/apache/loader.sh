@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
 
 # Load variables

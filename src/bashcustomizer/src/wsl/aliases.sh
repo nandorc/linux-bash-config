@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # Aliases for WSL interoperability
-alias open="explorer.exe"
-alias clip="clip.exe"
+alias bc:open="explorer.exe"
+alias bc:clip="clip.exe"
