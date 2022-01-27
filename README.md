@@ -1,89 +1,38 @@
-# Bash Utilities
-
-> **Author:** Daniel F. Rivera C. <<dsoftcolombia@gmail.com>>
-
-## Description
+# Bash Utilities v2.0
 
 This repository is intended to provide a simple way to customize linux terminal behaviour and give linux users tools to execute some administration tasks easy. It was tested on WSL.
 
-## Features
+# Features
 
-* Displays git information
-* Aliases for using WSL interoperability
-* Quick access to apache webservice funcionalities
-* Autostart on login request for apache service
-* Quick access to mysql service funcionalities
-* Autostart on login request for mysql service
-* Quick access to lamp server funcionalities
-* Autostart on login request for lamp server
-* Quick access to elasticsearch service funcionalities
-* Autostart on login for elasticsearch service
-* Quick access to magento server funcionalities
-* Autostart on login request for magento server
-* Quick access to docker service funcionalities
-* Autostart on login request for docker service
-* Management of files and folders permissions
-* Provides support to additional configurations
+- bashcustomizer allows to add customizations for bash behaviour, adding aliases and checking services at startup.
+- setpermissions allow to manage files and folders permissions.
+- mdv provides a way to view Markdown files using less or pandoc.
 
-## Additional Configuration Note
+# Installation
 
-If you like to include extra features, aliases or on run scripts you must do it creating a new file. It must be `~/.bash_aliases_extra`
+In order to install this tool, you must include it at user directory (~) as a git submodule. It is not necessary for you to commit changes at user directory, so if you want you can add a .gitignore file at that directory to avoid git tracking. Following command may help you to create it.
 
-## Tools
+~~~
+touch ~/.gitignore
+~~~
 
----
+Once created, you only have to write next content inside the file. You can use any text editor (vi, nano, code, ...).
 
-### bashcustomize
- 
-This tool allows users to set or unset variables which manage the behavoiur of the linux terminal.
- 
-> `bashcustomize help`
->
-> Print help message with basic information about available commands
+`.gitignore`
 
-> `bashcustomize list`
->
-> Prints defined variables list
+~~~
+/*
+!/.gitignore
+!/.gitmodules
+!/.bash_utilities
+~~~
 
-> `bashcustomize set [name] [?value]`
->
-> Set a customization variable, if no [value] provided is set to blank
+If is your first time working with git modules, the following commands may be helpful to add the tool.
 
-> `bashcustomize unset [name]`
->
-> Unset (delete) a customization variable
+~~~
+cd ~
+git init
+git submodule add -b master --name bash_utilities git@github.com:nandorc/linux-bash-utilities.git ./.bash_utilities
+git add .
+~~~
 
-> `bashcustomize reset`
->
-> Set default values on variables
-
----
-
-### setpermissions
-
-This tool allow users to manage files and folders permissions and ownership based on `find`, `chmod` and `chown` commands. It needs **sudo** privileges to be executed. By default it assign **2775** access to folders, **0664** access to files and **0774** access to executable files.
-
- `setpermissions [?options] [path]`
-> **Options:**
->
->> `-owner [ownername]`
->>
->> If is set, it specify the linux user name as *ownername* to be used at **user:group** ownership assignment through `chown` command.
->
->> `-group [groupname]`
->>
->> If is set, it specify the linux group name as *groupname* to be used at **user:group** ownership assignment through `chown` command.
->
->> `-file [permission]`
->> 
->> If is set, it modifies the default value assigned  for files when setting permissions. By default, files take **0664** permission.
->
->> `-folder [permission]`
->> 
->> If is set, it modifies the default value assigned  for folders when setting permissions. By default, folders take **2775** permission.
->
->> `-exe [permission]`
->> 
->> If is set, it modifies the default value assigned  for executable files when setting permissions. By default, executable files take **0774** permission.
-
----

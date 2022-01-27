@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Load dependencies
+source ~/.bash_utilities/lib/ext/dsoft/messages.sh
+source ~/.bash_utilities/lib/ext/dsoft/inihandler.sh
+
+if [ "$1" == "help" ]; then
+    if [ -z "$2" ]; then
+        mdv ~/.bash_utilities/src/bashcustomizer/README.md
+    else
+        mdv ~/.bash_utilities/src/bashcustomizer/src/"$2"/README.md
+    fi
+elif [ "$1" == "list" ]; then
+    getAllINIVars ~/.bash_utilities/src/bashcustomizer/etc/vars.ini
+elif [ "$1" == "set" ]; then
+    ~/.bash_utilities/src/bashcustomizer/cmd/manage.sh set "$2" "$3"
+elif [ "$1" == "unset" ]; then
+    ~/.bash_utilities/src/bashcustomizer/cmd/manage.sh unset "$2"
+elif [ "$1" = "reset" ]; then
+    ~/.bash_utilities/src/bashcustomizer/cmd/reset.sh
+elif [ "$1" = "init" ]; then
+    ~/.bash_utilities/src/bashcustomizer/cmd/reset.sh -q
+else
+    printErrorMessage "No valid option provided for bashcustomizer." before
+    printWarningMessage "Try 'bashcustomizer help' to look for available commands." after
+fi
