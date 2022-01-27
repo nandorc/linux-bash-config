@@ -14,7 +14,7 @@ PATH="$PATH:~/.bash_utilities/bin"
 
 # Finish and print post init warning
 printInfoMessage "Bash Utilities system loaded."
-# sleep 1 && clear
+sleep 1 && clear
 
 # Print post-loading message if exists
 if [ ! -z "$post_load_message" ]; then
