@@ -37,3 +37,8 @@ while [ -n "$1" ]; do
     esac
     shift
 done
+
+# Set default values if necessary
+[ -z "$exeperm" ] && exeperm=0774
+[ -z "$filperm" ] && filperm=0664
+[ -z "$dirperm" ] && dirperm=2775
