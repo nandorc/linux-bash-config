@@ -33,29 +33,7 @@ If you like to include extra features, aliases or on run scripts you must do it 
 
 ---
 
-### bashcustomize
- 
-This tool allows users to set or unset variables which manage the behavoiur of the linux terminal.
- 
-> `bashcustomize help`
->
-> Print help message with basic information about available commands
 
-> `bashcustomize list`
->
-> Prints defined variables list
-
-> `bashcustomize set [name] [?value]`
->
-> Set a customization variable, if no [value] provided is set to blank
-
-> `bashcustomize unset [name]`
->
-> Unset (delete) a customization variable
-
-> `bashcustomize reset`
->
-> Set default values on variables
 
 ---
 
