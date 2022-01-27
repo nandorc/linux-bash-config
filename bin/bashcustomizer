@@ -5,7 +5,11 @@ source ~/.bash_utilities/lib/ext/dsoft/messages.sh
 source ~/.bash_utilities/lib/ext/dsoft/inihandler.sh
 
 if [ "$1" == "help" ]; then
-    mdv ~/.bash_utilities/src/bashcustomizer/README.md
+    if [ -z "$2" ]; then
+        mdv ~/.bash_utilities/src/bashcustomizer/README.md
+    else
+        mdv ~/.bash_utilities/src/bashcustomizer/src/"$2"/README.md
+    fi
 elif [ "$1" == "list" ]; then
     getAllINIVars ~/.bash_utilities/src/bashcustomizer/etc/vars.ini
 elif [ "$1" == "set" ]; then
