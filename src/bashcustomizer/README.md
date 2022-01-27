@@ -6,6 +6,10 @@ This tool allows users to set or unset variables which manage the behavoiur of t
 
 > Print help message with basic information about available commands
 
+`bashcustomizer help [customization]`
+
+> Print help message with basic information about specific [customization]. This includes basic description, variables and aliases for each customization.
+
 `bashcustomizer list`
 
 > Prints defined variables list
