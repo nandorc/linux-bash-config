@@ -1,4 +1,4 @@
-# Bash Utilities v2.0
+# Bash Utilities v2.0.1
 
 This repository is intended to provide a simple way to customize linux terminal behaviour and give linux users tools to execute some administration tasks easy. It was tested on WSL.
 
@@ -12,27 +12,34 @@ This repository is intended to provide a simple way to customize linux terminal 
 
 In order to install this tool, you must include it at user directory (~) as a git submodule. It is not necessary for you to commit changes at user directory, so if you want you can add a .gitignore file at that directory to avoid git tracking. Following command may help you to create it.
 
-~~~
+```
 touch ~/.gitignore
-~~~
+```
 
 Once created, you only have to write next content inside the file. You can use any text editor (vi, nano, code, ...).
 
 `.gitignore`
 
-~~~
+```
 /*
 !/.gitignore
 !/.gitmodules
 !/.bash_utilities
-~~~
+```
 
 If is your first time working with git modules, the following commands may be helpful to add the tool.
 
-~~~
+```
 cd ~
 git init
 git submodule add -b master --name bash_utilities git@github.com:nandorc/linux-bash-utilities.git ./.bash_utilities
 git add .
-~~~
+```
 
+Once the submodule is added you have to execute `setup.sh`. Following command is and example of how to execute it.
+
+```
+~/.bash_utilities/setup.sh
+```
+
+That's it! If all goes well you just have to restart your system and will be able to use Bash Utilities commands.
