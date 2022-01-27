@@ -54,7 +54,7 @@ function startElasticsearchService() {
         fi
         cat "$(getINIVar ~/.bash_utilities/src/bashcustomizer/etc/vars.ini elasticsearch_path)"/pid >~/.bash_utilities/src/bashcustomizer/src/elasticsearch/pid
     fi
-    printMessage "Service is running."
+    printMessage "Elasticsearch is running."
 }
 
 # Stop elasticsearch service
@@ -76,12 +76,12 @@ function stopElasticSearchService() {
                     sleep 2
                 done
                 rm -f ~/.bash_utilities/src/bashcustomizer/src/elasticsearch/pid
-                printMessage "Service stopped."
+                printMessage "Elasticsearch stopped."
             fi
             unset service_pid java_services
         fi
     else
-        printMessage "Service not running or not responding."
+        printMessage "Elasticsearch not running or not responding."
     fi
 }
 
