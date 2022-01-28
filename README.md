@@ -1,4 +1,4 @@
-# Bash Utilities v2.0.1
+# Bash Utilities v2.0.2
 
 This repository is intended to provide a simple way to customize linux terminal behaviour and give linux users tools to execute some administration tasks easy. It was tested on WSL.
 
@@ -33,6 +33,7 @@ If is your first time working with git modules, the following commands may be he
 cd ~
 git init
 git submodule add -b master --name bash_utilities git@github.com:nandorc/linux-bash-utilities.git ./.bash_utilities
+git submodule update --init --remote --recursive
 git add .
 ```
 
