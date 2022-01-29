@@ -32,7 +32,7 @@ If is your first time working with git modules, the following commands may be he
 ```
 cd ~
 git init
-git submodule add -b master --name bash_utilities git@github.com:nandorc/linux-bash-utilities.git ./.bash_utilities
+git submodule add -b master --name bash_utilities https://github.com/nandorc/linux-bash-utilities.git ./.bash_utilities
 git submodule update --init --remote --recursive
 git add .
 ```
