@@ -1,4 +1,4 @@
 [submodule "lib/ext/dsoft"]
 	path = lib/ext/dsoft
-	url = git@github.com:nandorc/linux-bash-libraries.git
+	url = https://github.com/nandorc/linux-bash-libraries.git
 	branch = master
