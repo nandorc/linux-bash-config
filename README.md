@@ -1,4 +1,4 @@
-# Bash Utilities v2.0.2
+# Bash Utilities v2.0.3
 
 This repository is intended to provide a simple way to customize linux terminal behaviour and give linux users tools to execute some administration tasks easy. It was tested on WSL.
 
