@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Load dependencies
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
-source ~/.bash_utilities/src/bashcustomizer/src/elasticsearch/commands.sh
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/lib/messages.sh
+source ~/.basher/src/bashcustomizer/src/elasticsearch/commands.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 # Check service loading
 mustSkip=0 && isRunning=0 && triesCount=0

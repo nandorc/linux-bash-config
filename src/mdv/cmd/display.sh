@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Load dependencies
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
-source ~/.bash_utilities/lib/ext/dsoft/inihandler.sh
+source ~/.basher/lib/messages.sh
+source ~/.basher/lib/inihandler.sh
 
 # Check if pandoc can be used
 # returns:
@@ -10,7 +10,7 @@ source ~/.bash_utilities/lib/ext/dsoft/inihandler.sh
 #    0 :: pandoc can't be used
 #   -1 :: pandoc can be used but is not installed
 function canUsePandoc() {
-    use_pandoc=$(getINIVar ~/.bash_utilities/src/mdv/etc/config.ini use_pandoc)
+    use_pandoc=$(getINIVar ~/.basher/src/mdv/etc/config.ini use_pandoc)
     if [ -z "$use_pandoc" ] || [ "$use_pandoc" = "undefined" ] || [ $use_pandoc -eq 0 ]; then
         echo 0
     elif [ -z "$(whereis pandoc | sed -e "s/pandoc://" -e "s/ //g")" ]; then
@@ -40,7 +40,7 @@ function viewMDFile() {
         installPandoc
         if [ $(canUsePandoc) -eq -1 ]; then
             printErrorMessage "pandoc installation failed. less will be used to show files." after
-            setINIVar ~/.bash_utilities/src/mdv/etc/config.ini use_pandoc_mdviewer 0
+            setINIVar ~/.basher/src/mdv/etc/config.ini use_pandoc_mdviewer 0
         else
             printInfoMessage "pandoc was intalled!" after
         fi
@@ -50,9 +50,9 @@ function viewMDFile() {
 }
 
 # Create config.ini file if is first use
-if [ "$(getINIVar ~/.bash_utilities/src/mdv/etc/config.ini use_pandoc)" = "undefined" ]; then
+if [ "$(getINIVar ~/.basher/src/mdv/etc/config.ini use_pandoc)" = "undefined" ]; then
     printWarningMessage "mdv configuration not defined. Must define before using." before
-    ~/.bash_utilities/src/mdv/cmd/reset.sh
+    ~/.basher/src/mdv/cmd/reset.sh
 fi
 
 # Execute command

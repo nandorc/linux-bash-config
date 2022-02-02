@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 # Load variables
-wrapFileInclusion "Including apache variables..." "~/.bash_utilities/src/bashcustomizer/src/apache/variables.sh"
+wrapFileInclusion "Including apache variables..." "~/.basher/src/bashcustomizer/src/apache/variables.sh"
 # Load aliases
-wrapFileInclusion "Including apache aliases..." "~/.bash_utilities/src/bashcustomizer/src/apache/aliases.sh"
+wrapFileInclusion "Including apache aliases..." "~/.basher/src/bashcustomizer/src/apache/aliases.sh"

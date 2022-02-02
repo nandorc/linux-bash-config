@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Load dependencies
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
+source ~/.basher/lib/messages.sh
 
 # Init message
 printInfoMessage "Loading Bash Utilities system..."
 
 # Include Bash Utilities bin folder to path
-PATH="$PATH:~/.bash_utilities/bin"
+PATH="$PATH:~/.basher/bin"
 
 # Load bashcustomizer configuration
-. ~/.bash_utilities/src/bashcustomizer/etc/config.sh
+. ~/.basher/src/bashcustomizer/etc/config.sh
 
 # Finish and print post init warning
 printInfoMessage "Bash Utilities system loaded."

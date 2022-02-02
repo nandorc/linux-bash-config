@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load dependencies
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
+source ~/.basher/lib/messages.sh
 
 vars[0]="gitflow=on"
 vars[1]="wsl=off"
@@ -20,14 +20,14 @@ vars[13]="docker=off"
 vars[14]="docker_autostart=off"
 
 # Remove vars.ini file if exists
-if [ -f ~/.bash_utilities/src/bashcustomizer/etc/vars.ini ]; then
-    rm ~/.bash_utilities/src/bashcustomizer/etc/vars.ini
+if [ -f ~/.basher/src/bashcustomizer/etc/vars.ini ]; then
+    rm ~/.basher/src/bashcustomizer/etc/vars.ini
 fi
 
 # Save default values on variables
 for i in "${vars[@]}"; do
     arr=(${i//=/ })
-    ~/.bash_utilities/src/bashcustomizer/cmd/manage.sh -q set "${arr[0]}" "${arr[1]}"
+    ~/.basher/src/bashcustomizer/cmd/manage.sh -q set "${arr[0]}" "${arr[1]}"
 done
 
 # Print end message if required

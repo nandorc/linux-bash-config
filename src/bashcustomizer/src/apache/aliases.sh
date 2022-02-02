@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 # Apache
 alias bc:apache:start="wrapCommand --colored 'Starting apache service...' 'sudo service apache2 start' both"

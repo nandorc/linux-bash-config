@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Load dependencies
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
-source ~/.bash_utilities/lib/ext/dsoft/inihandler.sh
+source ~/.basher/lib/messages.sh
+source ~/.basher/lib/inihandler.sh
 
 # Define variables values
 #   $quiet 0/1
@@ -16,11 +16,11 @@ else
 fi
 
 # Create vars.ini file if not exists
-if [ ! -f ~/.bash_utilities/src/bashcustomizer/etc/vars.ini ]; then
+if [ ! -f ~/.basher/src/bashcustomizer/etc/vars.ini ]; then
     if [ $quiet -eq 0 ]; then
         printWarningMessage "No file holding any variable found. File will be created." before
     fi
-    touch ~/.bash_utilities/src/bashcustomizer/etc/vars.ini
+    touch ~/.basher/src/bashcustomizer/etc/vars.ini
 fi
 
 # Prints a formatted message.
@@ -40,7 +40,7 @@ if [ "$action" != "set" ] && [ "$action" != "unset" ]; then
 elif [ -z "$var" ]; then
     printErrorMessage "No variable name provided" both
 elif [ "$action" = "set" ]; then
-    setINIVar ~/.bash_utilities/src/bashcustomizer/etc/vars.ini "$var" "$val"
+    setINIVar ~/.basher/src/bashcustomizer/etc/vars.ini "$var" "$val"
     if [ $quiet -eq 0 ]; then
         if [ -z "$val" ]; then
             printResetNeedMessage "'$var' setted to empty value"
@@ -49,7 +49,7 @@ elif [ "$action" = "set" ]; then
         fi
     fi
 else
-    dropResult=$(dropINIVar ~/.bash_utilities/src/bashcustomizer/etc/vars.ini "$var")
+    dropResult=$(dropINIVar ~/.basher/src/bashcustomizer/etc/vars.ini "$var")
     if [ $quiet -eq 0 ]; then
         if [ $dropResult -eq 1 ]; then
             printResetNeedMessage "'$var' was deleted"
