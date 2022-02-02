@@ -24,7 +24,7 @@ Once created, you only have to write next content inside the file. You can use a
 /*
 !/.gitignore
 !/.gitmodules
-!/.bash_utilities
+!/.basher
 ```
 
 If is your first time working with git modules, the following commands may be helpful to add the tool.
@@ -32,7 +32,7 @@ If is your first time working with git modules, the following commands may be he
 ```
 cd ~
 git init
-git submodule add -b master --name bash_utilities https://github.com/nandorc/linux-bash-utilities.git ./.bash_utilities
+git submodule add -b master --name bash_utilities https://github.com/nandorc/linux-bash-utilities.git ./.basher
 git submodule update --init --recursive
 git add .
 ```
@@ -40,7 +40,7 @@ git add .
 Once the submodule is added you have to execute `setup.sh`. Following command is and example of how to execute it.
 
 ```
-~/.bash_utilities/setup.sh
+~/.basher/setup.sh
 ```
 
 That's it! If all goes well you just have to restart your system and will be able to use Bash Utilities commands.

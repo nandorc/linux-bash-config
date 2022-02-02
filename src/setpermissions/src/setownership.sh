@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load dependencies
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
+source ~/.basher/lib/messages.sh
 
 # Assign ownership
 if [ ! -z "$ownername" ]; then

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Load dependencies
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/lib/messages.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 # Check and load apache service
 printMessage "Checking docker service..."

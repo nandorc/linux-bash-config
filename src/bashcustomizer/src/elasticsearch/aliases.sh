@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/src/bashcustomizer/src/elasticsearch/commands.sh
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/src/bashcustomizer/src/elasticsearch/commands.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 alias bc:elasticsearch:start="wrapCommand --colored 'Starting elasticseach service...' 'startElasticsearchService' both"
 alias bc:elasticsearch:stop="wrapCommand --colored 'Stopping elasticsearch service...' 'stopElasticSearchService' both"

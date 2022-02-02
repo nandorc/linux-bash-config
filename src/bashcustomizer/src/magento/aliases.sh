@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/src/bashcustomizer/src/magento/commands.sh
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/src/bashcustomizer/src/magento/commands.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 # Magento Commerce
 alias bc:magento:start="wrapCommand --colored 'Starting Magento services...' 'startMagentoServices' both"

@@ -1,20 +1,6 @@
-# Bash Libraries v1.0.1
+# Current available libraries
 
-Collection of general purpose libraríes to use on bash projects as git submodules.
-
-## Instalation
-
-Add this repo as a git submodule in your bash project. Following is the recomended command to use when including submodule.
-
-```
-git submodule add -b master --name lib/ext/dsoft https://github.com/nandorc/linux-bash-libraries.git ./lib/ext/dsoft
-
-git submodule update --init
-```
-
-## Current available libraries
-
-### `lib/ext/dsoft/messages.sh`
+## `lib/messages.sh`
 
 > This library allows to print pre-formatted messages for error, information and warning. Included methods are:
 >
@@ -27,7 +13,7 @@ git submodule update --init
 >
 > [message] may include escaped sequences.
 
-### `lib/ext/dsoft/inihandler.sh`
+## `lib/inihandler.sh`
 
 > This library allows to manage .ini files for setting or getting variables. Included methods are:
 > 

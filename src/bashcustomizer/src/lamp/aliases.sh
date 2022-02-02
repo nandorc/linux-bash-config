@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/src/bashcustomizer/src/lamp/commands.sh
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/src/bashcustomizer/src/lamp/commands.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 # LAMP Service
 alias bc:lamp:start="wrapCommand --colored 'Starting LAMP services...' 'startLampServices' both"

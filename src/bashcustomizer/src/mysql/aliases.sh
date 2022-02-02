@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 # MySQL service
 alias bc:mysql:start="wrapCommand --colored 'Starting mysql service...' 'sudo service mysql start' both"

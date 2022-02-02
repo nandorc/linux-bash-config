@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load dependencies
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
+source ~/.basher/lib/messages.sh
 
 # $1 input spacing
 function transformBeforeSpacing() {
@@ -56,7 +56,7 @@ function printColoredMessage() {
 #   --colored
 # $2 begin message
 # $3 command
-# $4 spacing @see ~/.bash_utilities/lib/ext/dsoft/messages.sh/printMessage
+# $4 spacing @see ~/.basher/lib/messages.sh/printMessage
 function wrapCommand() {
     if [ "$1" = "--colored" ]; then
         colored=1 && message="$2" && command="$3" && spacing="$4"
@@ -73,7 +73,7 @@ function wrapCommand() {
 #   --colored
 # $2 begin message
 # $3 file path
-# $4 spacing @see ~/.bash_utilities/lib/ext/dsoft/messages.sh/printMessage
+# $4 spacing @see ~/.basher/lib/messages.sh/printMessage
 function wrapFileInclusion() {
     if [ "$1" = "--colored" ]; then
         colored=1 && message="$2" && path="$3" && spacing="$4"

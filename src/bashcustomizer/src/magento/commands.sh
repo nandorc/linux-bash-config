@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/src/bashcustomizer/src/elasticsearch/commands.sh
+source ~/.basher/src/bashcustomizer/src/elasticsearch/commands.sh
 
 # Start magento services
 function startMagentoServices() {

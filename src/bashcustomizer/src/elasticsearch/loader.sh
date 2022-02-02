@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 # Load aliases
-wrapFileInclusion "Including elasticsearch aliases..." "~/.bash_utilities/src/bashcustomizer/src/elasticsearch/aliases.sh"
+wrapFileInclusion "Including elasticsearch aliases..." "~/.basher/src/bashcustomizer/src/elasticsearch/aliases.sh"

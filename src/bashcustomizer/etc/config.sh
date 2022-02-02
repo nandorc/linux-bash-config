@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Load dependencies
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
-source ~/.bash_utilities/lib/ext/dsoft/inihandler.sh
-source ~/.bash_utilities/src/bashcustomizer/lib/local/customshandler.sh
+source ~/.basher/lib/messages.sh
+source ~/.basher/lib/inihandler.sh
+source ~/.basher/src/bashcustomizer/lib/local/customshandler.sh
 
 # Read or initialize variables
 printMessage "Reading bashcustomizer variables..."
-if [ ! -f ~/.bash_utilities/src/bashcustomizer/etc/vars.ini ]; then
+if [ ! -f ~/.basher/src/bashcustomizer/etc/vars.ini ]; then
     bashcustomizer init
 fi
 printMessage "done"
@@ -34,7 +34,7 @@ bc_magento_autostart=$(checkCustomization magento_autostart)
 
 # Elasticsearch Customization Check
 bc_elasticsearch_flag=0
-bc_elasticsearch_path=$(getINIVar ~/.bash_utilities/src/bashcustomizer/etc/vars.ini elasticsearch_path)
+bc_elasticsearch_path=$(getINIVar ~/.basher/src/bashcustomizer/etc/vars.ini elasticsearch_path)
 if [ -n "$bc_elasticsearch_path" ]; then
     if [ -d "$bc_elasticsearch_path"/bin ]; then
         if [[ ! "$PATH" =~ "$bc_elasticsearch_path" ]]; then

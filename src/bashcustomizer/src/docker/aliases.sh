@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 # Docker Service
 alias bc:docker:start="wrapCommand --colored 'Starting docker service...' 'sudo service docker start' both"

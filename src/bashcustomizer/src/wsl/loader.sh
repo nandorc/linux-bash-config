@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.bash_utilities/src/bashcustomizer/lib/local/executor.sh
+source ~/.basher/src/bashcustomizer/lib/local/executor.sh
 
 # Aliases
-wrapFileInclusion "Including WSL aliases..." "~/.bash_utilities/src/bashcustomizer/src/wsl/aliases.sh"
+wrapFileInclusion "Including WSL aliases..." "~/.basher/src/bashcustomizer/src/wsl/aliases.sh"
