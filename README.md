@@ -16,7 +16,7 @@ git clone -b v2.0.5 https://github.com/nandorc/linux-basher.git .basher
 
 That's it! If all goes well you just have to restart your system and will be able to use the `basher` command.
 
-## Use
+## Usage
 
 Basher for Linux stands on `basher` command. The most basic instruction to send once installed could be the following.
 
