@@ -43,22 +43,20 @@
 
 ## `lib/wrapper.sh`
 
-> This library extends `lib/messages.sh` to allow users to wrap command executions with formatted messages. Included methods are:
+> This library extends `lib/messages.sh` and `lib/flagger.sh` to allow users to wrap command executions with formatted messages. Included methods are:
 >
 > - transformBeforeSpacing [spacing]
 > - transformAfterSpacing [spacing]
-> - printColoredMessage [message] [spacing] [useColor] [type]
+> - printColoredMessage [message] [?options]
 >
 > [spacing] refers to message spacing. Is based on `lib/messages.sh` so values must be the same.
 >
-> [message] refers to the starting message which will wrap the action.
+> [?options] refers to flags that can be attached to the command in order to alter its behaviour.
 >
-> [useColor] refers to a value that point to use (1) or not use (0) color on messages.
->
-> [type] refers to the type of message to be shown. It must be 'info', 'warning' or 'error'. If not sent 'info' will be used as default.
-
-<!-- > - wrapCommand [--colored] [message] [command] [spacing] -->
-<!-- > - wrapFileInclusion [--colored] [message] [path] [spacing] -->
-<!-- > [--colored] refers to the posibility to show [message] as information message or plain message. -->
-<!-- > [command] refers to the single command wich have to be executed. -->
-<!-- > [path] refers to the path of the file wich is intended to be included. -->
+> > `--spacing [spacing]` : Same as refered for `lib/messages.sh`. If nothing sent 'both' will be used as default.
+> >
+> > `--no-color` : Points to not using colors on messages.
+> >
+> > `--type [type]` : Type of message to be shown. It must be 'info', 'warning' or 'error'. If not sent 'info' will be used as default.
+> >
+> > `--wrap-position [position]` : If message is for wrapping, point if message [spacing] has to be transformed for a 'begin' or 'end' message. If nothing sent, message [spacing] won't be transformed.

@@ -2,6 +2,7 @@
 
 # Load dependencies
 source ~/.basher/lib/messages.sh
+source ~/.basher/lib/flagger.sh
 
 # $1 input spacing
 function transformBeforeSpacing() {
@@ -24,74 +25,49 @@ function transformAfterSpacing() {
 }
 
 # $1 message
-# $2 spacing
-# $3 useColor
-# $4 type
-#   info : (default)
-#   warning
-#   error
+# $* extra params
+#   --spacing spacing
+#       @see ~/.basher/lib/messages.sh/printMessage
+#       default: both
+#   --no-color
+#       points to not using colors on message
+#   --type type
+#       info : (default)
+#       warning
+#       error
+#   --wrap-position position
+#       begin
+#       end
 function printColoredMessage() {
-    if [ $3 -eq 1 ]; then
-        if [ "$4" = "warning" ]; then
-            printWarningMessage "$1" "$2"
-        elif [ "$4" = "error" ]; then
-            printErrorMessage "$1" "$2"
+    # Set variables
+    useColor=1
+    [ $(hasFlag --no-color $*) -eq 1 ] && useColor=0
+    spacing=$(getFlagValue --spacing $*)
+    [ -z "$spacing" ] && spacing=both
+    type=$(getFlagValue --type $*)
+    [ -z "$type" ] && type=info
+    wrapPosition=$(getFlagValue --wrap-position $*)
+
+    # Transform spacing if necessary
+    if [ "$wrapPosition" = "begin" ]; then
+        spacing=$(transformBeforeSpacing $spacing)
+    elif [ "$wrapPosition" = "end" ]; then
+        spacing=$(transformAfterSpacing $spacing)
+    fi
+
+    # Process message
+    if [ $useColor -eq 1 ]; then
+        if [ "$type" = "warning" ]; then
+            printWarningMessage "$1" "$spacing"
+        elif [ "$type" = "error" ]; then
+            printErrorMessage "$1" "$spacing"
         else
-            printInfoMessage "$1" "$2"
+            printInfoMessage "$1" "$spacing"
         fi
     else
-        printMessage "$1" "$2"
+        printMessage "$1" "$spacing"
     fi
+
+    # Unset variables
+    unset useColor spacing type wrapPosition
 }
-
-# # Wrap a command execution between two messages
-# # $1 color
-# #   --colored
-# # $2 begin message
-# # $3 command
-# # $4 spacing @see ~/.basher/lib/messages.sh/printMessage
-# function wrapCommand() {
-#     if [ "$1" = "--colored" ]; then
-#         colored=1 && message="$2" && command="$3" && spacing="$4"
-#     else
-#         colored=0 && message="$1" && command="$2" && spacing="$3"
-#     fi
-#     printColoredMessage "$message" "$(transformBeforeSpacing "$spacing")" "$colored"
-#     $command && printColoredMessage "done" "$(transformAfterSpacing "$spacing")" "$colored"
-#     unset colored message command spacing
-# }
-
-# # Wrap file inclusion
-# # $1 color
-# #   --colored
-# # $2 begin message
-# # $3 file path
-# # $4 spacing @see ~/.basher/lib/messages.sh/printMessage
-# function wrapFileInclusion() {
-#     if [ "$1" = "--colored" ]; then
-#         colored=1 && message="$2" && path="$3" && spacing="$4"
-#     else
-#         colored=0 && message="$1" && path="$2" && spacing="$3"
-#     fi
-#     notFound=0
-#     if [[ "$path" =~ "~/" ]]; then
-#         useHome=1
-#         path=$(echo "$path" | sed -e "s|~/||")
-#         [ ! -f ~/"$path" ] && notFound=1
-#     else
-#         useHome=0
-#         [ ! -f "$path" ] && notFound=1
-#     fi
-#     if [ $notFound -eq 1 ]; then
-#         printColoredMessage "No file found at $path" "$spacing" "$colored" error
-#     else
-#         printColoredMessage "$message" "$(transformBeforeSpacing "$spacing")" "$colored"
-#         if [ $useHome -eq 1 ]; then
-#             . ~/"$path"
-#         else
-#             . "$path"
-#         fi
-#         printColoredMessage "done" "$(transformAfterSpacing "$spacing")" "$colored"
-#     fi
-#     unset colored message command spacing useHome
-# }
