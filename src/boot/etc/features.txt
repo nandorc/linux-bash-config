@@ -1,0 +1,8 @@
+git                 GIT tracking for repository events and branch name.
+apache              Webserver based on apache2 service.
+mysql               DBMS based on mysql service.
+lamp                LAMP services (apache and mysql together).
+elasticsearch       Search engine optimization service based on elasticsearch.
+magento             Magento services (lamp and elasticsearch together).
+docker              Containerization service based on docker service.
+jenkins             Deployment service based on jenkins service.
