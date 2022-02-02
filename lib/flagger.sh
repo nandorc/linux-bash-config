@@ -30,3 +30,45 @@ function hasFlag() {
     [ -z "$1" ] && echo 0
     unset wantedFlag
 }
+
+# Delete a flag with its value from list
+# $1 flag to delete
+# $* original parameters list
+function pruneFlagValue() {
+    wantedFlag="$1" && shift
+    prunedParameters=""
+    while [ -n "$1" ]; do
+        if [ "$1" != "$wantedFlag" ]; then
+            if [ -z "$prunedParameters" ]; then
+                prunedParameters="$1"
+            else
+                prunedParameters="$prunedParameters $1"
+            fi
+        else
+            shift
+        fi
+        shift
+    done
+    echo "$prunedParameters"
+    unset wantedFlag prunedParameters
+}
+
+# Delete a flag from list
+# $1 flag to delete
+# $* original parameters list
+function pruneFlag() {
+    wantedFlag="$1" && shift
+    prunedParameters=""
+    while [ -n "$1" ]; do
+        if [ "$1" != "$wantedFlag" ]; then
+            if [ -z "$prunedParameters" ]; then
+                prunedParameters="$1"
+            else
+                prunedParameters="$prunedParameters $1"
+            fi
+        fi
+        shift
+    done
+    echo "$prunedParameters"
+    unset wantedFlag prunedParameters
+}
