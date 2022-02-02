@@ -6,13 +6,13 @@ source ~/.basher/lib/flagger.sh
 
 if [ "$1" = "--help" ]; then
     basher mdv ~/.basher/src/README.md
-elif [ "$1" = "mdv" ]; then
-    ~/.basher/src/mdv/main.sh $(pruneFlag mdv $*)
-elif [ "$1" = "perms" ]; then
-    ~/.basher/src/perms/main.sh $(pruneFlag perms $*)
-elif [ "$1" = "boot" ]; then
-    ~/.basher/src/boot/main.sh $(pruneFlag boot $*)
 else
-    printErrorMessage "No valid parameters received." before
-    printWarningMessage "Use 'basher --help' to get info about the tool." after
+    command=(${1//:/ })
+    if [ -d ~/.basher/src/"${command[0]}" ]; then
+        ~/.basher/src/"${command[0]}"/main.sh ${command[1]} $(pruneFlag $1 $*)
+    else
+        printErrorMessage "No valid parameters received." before
+        printWarningMessage "Use 'basher --help' to get info about the tool." after
+    fi
+    unset command
 fi
