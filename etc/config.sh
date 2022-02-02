@@ -4,7 +4,7 @@
 source ~/.basher/lib/messages.sh
 
 # Init message
-printInfoMessage "Loading Bash Utilities system..."
+printInfoMessage "Loading Basher for Linux..."
 
 # Include Bash Utilities bin folder to path
 PATH="$PATH:~/.basher/bin"
@@ -13,7 +13,7 @@ PATH="$PATH:~/.basher/bin"
 . ~/.basher/src/bashcustomizer/etc/config.sh
 
 # Finish and print post init warning
-printInfoMessage "Bash Utilities system loaded."
+printInfoMessage "done"
 sleep 1 && clear
 
 # Print post-loading message if exists

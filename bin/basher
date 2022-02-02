@@ -8,6 +8,8 @@ if [ "$1" = "--help" ]; then
     basher mdv ~/.basher/src/README.md
 elif [ "$1" = "mdv" ]; then
     ~/.basher/src/mdv/main.sh $(pruneFlag mdv $*)
+elif [ "$1" = "perms" ]; then
+    ~/.basher/src/perms/main.sh $(pruneFlag perms $*)
 else
     printErrorMessage "No valid parameters received." before
     printWarningMessage "Use 'basher --help' to get info about the tool." after
