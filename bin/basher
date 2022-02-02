@@ -10,6 +10,8 @@ elif [ "$1" = "mdv" ]; then
     ~/.basher/src/mdv/main.sh $(pruneFlag mdv $*)
 elif [ "$1" = "perms" ]; then
     ~/.basher/src/perms/main.sh $(pruneFlag perms $*)
+elif [ "$1" = "boot" ]; then
+    ~/.basher/src/boot/main.sh $(pruneFlag boot $*)
 else
     printErrorMessage "No valid parameters received." before
     printWarningMessage "Use 'basher --help' to get info about the tool." after

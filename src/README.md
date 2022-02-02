@@ -12,4 +12,8 @@ This command controls actions allowed by Basher for Linux repository inclusion.
 
 `basher perms [?options] [path]`
 
-> Allows user to manage files/folders ownership and permissions. For complete reference type `basher perms --help`
+> Allows user to manage files/folders ownership and permissions. For complete reference type: `basher perms --help`
+
+`basher boot [?options] [action] [?value]`
+
+> Allows to manage on boot services check and start. For complete reference type: `basher boot --help`
