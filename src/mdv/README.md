@@ -1,16 +1,16 @@
-# mdv command
+# basher mdv command
 
 This command allows to display Markdown files using pandoc or less.
 
-`mdv --help`
+`basher mdv --help`
 
 > Print this information.
 
-`mdv --reset`
+`basher mdv --reset`
 
 > Define or re-define setted value for use_pandoc variable at config.ini file in order to specify if pando must be used as Markdown files formatter.
 
-`mdv [path]`
+`basher mdv [path]`
 
 > Display using less or pandoc a file located at [path].
 
