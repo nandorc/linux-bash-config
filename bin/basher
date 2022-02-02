@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Dependencies
+source ~/.basher/lib/messages.sh
+source ~/.basher/lib/flagger.sh
+
+if [ "$1" = "--help" ]; then
+    basher mdv ~/.basher/src/README.md
+elif [ "$1" = "mdv" ]; then
+    ~/.basher/src/mdv/main.sh $(pruneFlag mdv $*)
+else
+    printErrorMessage "No valid parameters received." before
+    printWarningMessage "Use 'basher --help' to get info about the tool." after
+fi
