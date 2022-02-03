@@ -16,7 +16,7 @@ This command allow users to manage on boot services checking and starting.
 >
 > [features...] is the space separated list of names of intended features to be enabled.
 >
-> If no [features...] given, enables all features.
+> If no [features...] given, enables all available features.
 
 ## [?options]
 
