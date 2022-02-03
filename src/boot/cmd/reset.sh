@@ -4,8 +4,9 @@
 source ~/.basher/lib/inihandler.sh
 source ~/.basher/lib/wrapper.sh
 
-# Begin message
-printColoredMessage "Resetting features.ini file..." --wrap-position begin $*
+# Set variables and begin message
+options=$(getRebuildedOptions $*)
+printColoredMessage "Resetting features.ini file..." --wrap-position begin $options
 
 # Delete current features.ini file if exists
 if [ -f ~/.basher/src/boot/etc/features.ini ]; then
@@ -21,5 +22,6 @@ printMessage "* New features.ini file created."
 setINIVar ~/.basher/src/boot/etc/features.ini git on
 printMessage "* Default values stored in features.ini file."
 
-# End message
-printColoredMessage "done" --wrap-position end $*
+# Unset variables and end message
+printColoredMessage "done" --wrap-position end $options
+unset options

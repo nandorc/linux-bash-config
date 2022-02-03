@@ -25,7 +25,7 @@ function transformAfterSpacing() {
 }
 
 # $1 message
-# $* extra params
+# $* options
 #   --spacing spacing
 #       @see ~/.basher/lib/messages.sh/printMessage
 #       default: both
@@ -70,4 +70,60 @@ function printColoredMessage() {
 
     # Unset variables
     unset useColor spacing type wrapPosition
+}
+
+# PRIVATE
+# $1 flag
+# $2 options
+# $* params
+function getRebuildedOptionsFlag() {
+    flag=$1 && shift
+    options=$1 && shift
+    params=$*
+    value=$(hasFlag $flag $params)
+    if [ $value -eq 1 ] && [ -z "$options" ]; then
+        options="$flag"
+    elif [ $value -eq 1 ]; then
+        options="$options $flag"
+    fi
+    echo $options
+    unset flag options params value
+}
+
+# PRIVATE
+# $1 flag
+# $2 options
+# $* params
+function getRebuildedOptionsFlagValue() {
+    flag=$1 && shift
+    options=$1 && shift
+    params=$*
+    value=$(getFlagValue $flag $params)
+    if [ -n "$value" ] && [ -z "$options" ]; then
+        options="$flag $value"
+    elif [ -n "$value" ]; then
+        options="$options $flag $value"
+    fi
+    echo $options
+    unset flag options params value
+}
+
+# $* params
+function getRebuildedOptions() {
+    options=$(getRebuildedOptionsFlag --no-color "" $*)
+    options=$(getRebuildedOptionsFlagValue --spacing "$options" $*)
+    options=$(getRebuildedOptionsFlagValue --type "$options" $*)
+    options=$(getRebuildedOptionsFlagValue --wrap-position "$options" $*)
+    echo $options
+    unset options
+}
+
+# $* params
+function getOptionsPrunedParams() {
+    options=$(pruneFlag --no-color $*)
+    options=$(pruneFlagValue --spacing $options)
+    options=$(pruneFlagValue --type $options)
+    options=$(pruneFlagValue --wrap-position $options)
+    echo $options
+    unset options
 }
