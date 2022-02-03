@@ -11,7 +11,7 @@ printColoredMessage "Enabling features..." --wrap-position begin $options
 # Check features.ini file
 if [ ! -f ~/.basher/src/boot/etc/features.ini ]; then
     printWarningMessage "* features.ini not set"
-    basher boot:reset --no-color --spacing none
+    basher boot:reset --no-color --spacing none --no-restart
 fi
 
 # Enable services
