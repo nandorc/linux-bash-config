@@ -1,10 +1,10 @@
-# wsl customization
+# basher wsl customization
 
 Provides aliases to ease use of WSL interoperability.
 
 ## Aliases
 
-`bc:open [source]`
+`open [source]`
 
 > Command to wrap 'explorer.exe' tool.
 >
@@ -12,12 +12,12 @@ Provides aliases to ease use of WSL interoperability.
 >
 > If [source] is a URL (like https://google.com.co) it opens the resource using the default web browser.
 
-`bc:clip`
+`clip`
 
 > Command to wrap 'clip.exe' tool.
 >
 > This allows to send to Windows clipboard a text printed in command line. Following is the most simple case of use.
 >
 > ```
-> echo "This will be sent to Windows clipboard" | bc:clip
+> echo "This will be sent to Windows clipboard" | clip
 > ```
