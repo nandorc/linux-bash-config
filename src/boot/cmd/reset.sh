@@ -8,6 +8,12 @@ source ~/.basher/lib/wrapper.sh
 options=$(getRebuildedOptions $*)
 printColoredMessage "Resetting features.ini file..." --wrap-position begin $options
 
+# Create etc directory if doesn't exists
+if [ ! -d ~/.basher/src/boot/etc ]; then
+    mkdir -p ~/.basher/src/boot/etc
+    printMessage "* etc directory created."
+fi
+
 # Delete current features.ini file if exists
 if [ -f ~/.basher/src/boot/etc/features.ini ]; then
     rm -rf ~/.basher/src/boot/etc/features.ini

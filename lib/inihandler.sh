@@ -16,7 +16,7 @@ function getINIVar() {
 # $1 .ini file path
 function getAllINIVars() {
     if [ ! -f "$1" ]; then
-        echo -e "\nNo file found holding any variable at $1.\n"
+        echo -e "\nNo file found holding any variable at '$1'.\n"
     else
         echo -e "\nDEFINED VARIABLES"
         cat "$1"
