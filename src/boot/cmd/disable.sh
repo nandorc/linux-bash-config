@@ -6,7 +6,7 @@ source ~/.basher/lib/inihandler.sh
 
 # Begin
 options=$(getRebuildedOptions $*)
-printColoredMessage "Enabling features..." --wrap-position begin $options
+printColoredMessage "Disabling features..." --wrap-position begin $options
 
 # Check features.ini file
 if [ ! -f ~/.basher/src/boot/etc/features.ini ]; then
@@ -23,8 +23,8 @@ if [ -z "$params" ]; then
     for i in "${commandsArray[@]}"; do
         if [ -f "$i"/etc/loader.sh ]; then
             command=$(echo $i | sed -e "s|$homeDir||g")
-            setINIVar ~/.basher/src/boot/etc/features.ini $command on
-            printMessage "* $command was enabled to load on boot."
+            setINIVar ~/.basher/src/boot/etc/features.ini $command off
+            printMessage "* $command was disabled to load on boot."
             unset command
         fi
     done
@@ -33,8 +33,8 @@ else
     paramsArray=(${params// / })
     for i in "${paramsArray[@]}"; do
         if [ -f ~/.basher/src/"$i"/etc/loader.sh ]; then
-            setINIVar ~/.basher/src/boot/etc/features.ini $i on
-            printMessage "* $i was enabled to load on boot."
+            setINIVar ~/.basher/src/boot/etc/features.ini $i off
+            printMessage "* $i was disabled to load on boot."
         else
             printWarningMessage "* $i can't be used on boot."
         fi
@@ -44,6 +44,6 @@ fi
 unset params
 
 # End
-printColoredMessage "Features enabling process finished" --spacing none $(pruneFlagValue --spacing $options)
+printColoredMessage "Features disabling process finished" --spacing none $(pruneFlagValue --spacing $options)
 printColoredMessage "You must restart your system to apply changes." --wrap-position end --type warning $(pruneFlag --no-color $options)
 unset options

@@ -18,6 +18,14 @@ This command allow users to manage on boot services checking and starting.
 >
 > If no [features...] given, enables all available features.
 
+`basher boot:disable [?options] [features...]`
+
+> Disable boot features check.
+>
+> [features...] is the space separated list of names of intended features to be disabled.
+>
+> If no [features...] given, disables all available features.
+
 ## [?options]
 
 `--no-color`
