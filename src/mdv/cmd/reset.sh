@@ -10,17 +10,17 @@ if [ ! -d ~/.basher/src/mdv/etc ]; then
 fi
 if [ ! -f ~/.basher/src/mdv/etc/config.ini ]; then
     touch ~/.basher/src/mdv/etc/config.ini
-    printMessage "config.ini file created."
+    printMessage "* config.ini file created."
 else
     echo "" >~/.basher/src/mdv/etc/config.ini
-    printMessage "config.ini file cleaned."
+    printMessage "* config.ini file cleaned."
 fi
 
 # Write header information at config.ini file
 echo "# Use pandoc as MarkDown Viewer (recommended)." >~/.basher/src/mdv/etc/config.ini
 echo "#   In case you decide to use pandoc and is not installed, it will be installed on your machine, so you will need sudo access." >>~/.basher/src/mdv/etc/config.ini
 echo "#   If you decide to not use pandoc or it couln't be installed, less will be used as MarkDown viewer." >>~/.basher/src/mdv/etc/config.ini
-printMessage "config.ini file headers were written."
+printMessage "* config.ini file headers were written."
 
 # Ask user if want to use pandoc
 use_pandoc=-1
@@ -36,4 +36,4 @@ while [ $use_pandoc -eq -1 ]; do
 done
 echo "use_pandoc=$use_pandoc" >>~/.basher/src/mdv/etc/config.ini
 unset user_answer use_pandoc
-printInfoMessage "config.ini file ready." after
+printInfoMessage "config.ini file ready" after

@@ -28,6 +28,6 @@ done
 unset params paramsArray i
 
 # End
-printInfoMessage "done"
+printInfoMessage "Features enabling process finished"
 printColoredMessage "You must restart your system to apply changes." --wrap-position end --type warning $options
 unset options

@@ -31,7 +31,7 @@ elif [ -n "$1" ]; then
         ~/.basher/src/perms/cmd/setexefiles.sh "$path" "$exeperm"
         ~/.basher/src/perms/cmd/setregfiles.sh "$path" "$filperm"
         ~/.basher/src/perms/cmd/setfolders.sh "$path" "$dirperm"
-        printInfoMessage "all done" both
+        printInfoMessage "Permissions assignement process finished" both
     fi
     unset ownername groupname filperm dirperm exeperm path
 else

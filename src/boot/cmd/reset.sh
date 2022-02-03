@@ -29,5 +29,5 @@ setINIVar ~/.basher/src/boot/etc/features.ini git on
 printMessage "* Default values stored in features.ini file."
 
 # Unset variables and end message
-printColoredMessage "done" --wrap-position end $options
+printColoredMessage "features.ini file resetted" --wrap-position end $options
 unset options
