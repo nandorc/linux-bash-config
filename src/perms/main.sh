@@ -4,9 +4,7 @@
 source ~/.basher/lib/flagger.sh
 source ~/.basher/lib/messages.sh
 
-if [ $(hasFlag --help $*) -eq 1 ]; then
-    basher mdv ~/.basher/src/perms/README.md
-elif [ -n "$1" ]; then
+if [ -n "$1" ]; then
     # Get flag values
     path=$*
     useDefaults=$(hasFlag --defaults $path) && path=$(pruneFlag --defaults $path)
@@ -35,6 +33,6 @@ elif [ -n "$1" ]; then
     fi
     unset ownername groupname filperm dirperm exeperm path
 else
-    printErrorMessage "No valid options received." before
-    printWarningMessage "Type 'basher perms --help' to see available options." after
+    printErrorMessage "No valid parameters received for perms" before
+    printWarningMessage "Type 'basher help perms' to know the to use the command" after
 fi

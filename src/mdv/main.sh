@@ -2,15 +2,21 @@
 
 # Load dependencies
 source ~/.basher/lib/messages.sh
+source ~/.basher/lib/inihandler.sh
 
-# Manage utility parameters
-if [ "$1" = "--help" ]; then
-    ~/.basher/src/mdv/cmd/display.sh ~/.basher/src/mdv/README.md
-elif [ "$1" = "--reset" ]; then
+# Create config.ini file if is first use
+path="$1"
+if [ "$(getINIVar ~/.basher/src/mdv/etc/config.ini use_pandoc)" = "undefined" ]; then
+    printWarningMessage "* basher mdv configuration not defined" before
     ~/.basher/src/mdv/cmd/reset.sh
-elif [ ! -z "$1" ]; then
-    ~/.basher/src/mdv/cmd/display.sh "$1"
-else
-    printErrorMessage "No valid option provided for mdv." before
-    printWarningMessage "Try 'mdv --help' to look for available options." after
+elif [ "$1" = "--reset" ]; then
+    printWarningMessage "* basher mdv configuration will be resetted" before
+    path="$2"
+    ~/.basher/src/mdv/cmd/reset.sh
+fi
+if [ -n "$path" ]; then
+    ~/.basher/src/mdv/cmd/display.sh "$path"
+elif [ "$1" != "--reset" ]; then
+    printErrorMessage "A path to a file must be specified" both
+    printWarningMessage "Type 'basher help mdv' to know how to use the command" after
 fi
