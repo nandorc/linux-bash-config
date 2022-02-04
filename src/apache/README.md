@@ -1,4 +1,4 @@
-# apache customization
+# basher apache
 
 Provides variables and aliases to manage apache2 service.
 
@@ -14,18 +14,6 @@ Provides variables and aliases to manage apache2 service.
 
 ## Aliases
 
-`bc:apache:start`
-
-> Start apache2 service.
-
-`bc:apache:stop`
-
-> Stops apache2 service.
-
-`bc:apache:restart`
-
-> Restart apache2 service.
-
-`bc:localhost`
+`localhost`
 
 > Shows on deafult web browser the default site for apache (http://localhost).
