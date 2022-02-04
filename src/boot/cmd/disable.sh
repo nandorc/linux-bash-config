@@ -3,6 +3,7 @@
 # Dependencies
 source ~/.basher/lib/wrapper.sh
 source ~/.basher/lib/inihandler.sh
+source ~/.basher/src/boot/lib/featureshandler.sh
 
 # Begin
 options=$(getRebuildedOptions $*)
@@ -21,22 +22,21 @@ if [ -z "$params" ]; then
     commandsArray=(${commands// / })
     homeDir=~/.basher/src/
     for i in "${commandsArray[@]}"; do
-        if [ -f "$i"/etc/loader.sh ]; then
-            command=$(echo $i | sed -e "s|$homeDir||g")
+        command=$(echo $i | sed -e "s|$homeDir||g")
+        if [ $(isFeature $command) -eq 1 ]; then
             setINIVar ~/.basher/src/boot/etc/features.ini $command off
-            printMessage "* $command was disabled to load on boot."
-            unset command
+            printMessage "* $command was disabled to load on boot"
         fi
     done
-    unset commands commandsArray homeDir i
+    unset commands commandsArray homeDir i command
 else
     paramsArray=(${params// / })
     for i in "${paramsArray[@]}"; do
-        if [ -f ~/.basher/src/"$i"/etc/loader.sh ]; then
+        if [ $(isFeature $i) -eq 1 ]; then
             setINIVar ~/.basher/src/boot/etc/features.ini $i off
-            printMessage "* $i was disabled to load on boot."
+            printMessage "* $i was disabled to load on boot"
         else
-            printWarningMessage "* $i can't be used on boot."
+            printWarningMessage "* $i is not a service name"
         fi
     done
     unset paramsArray i
@@ -45,5 +45,5 @@ unset params
 
 # End
 printColoredMessage "Features disabling process finished" --spacing none $(pruneFlagValue --spacing $options)
-printColoredMessage "You must restart your system to apply changes." --wrap-position end --type warning $(pruneFlag --no-color $options)
+printColoredMessage "You must restart your system to apply changes" --wrap-position end --type warning $(pruneFlag --no-color $options)
 unset options
