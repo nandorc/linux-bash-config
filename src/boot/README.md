@@ -9,6 +9,12 @@ This command allow users to manage on boot services checking and starting.
 `basher boot:reset [?options]`
 
 > Reset stored values at features.ini file.
+>
+> [?options]
+>
+> `--no-restart`
+>
+> > Points to not showing a message to indicate the need for a system reboot.
 
 `basher boot:enable [?options] [features...]`
 
@@ -26,7 +32,7 @@ This command allow users to manage on boot services checking and starting.
 >
 > If no [features...] given, disables all available features.
 
-## [?options]
+## Common [?options]
 
 `--no-color`
 

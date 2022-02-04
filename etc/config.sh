@@ -2,7 +2,6 @@
 
 # Load dependencies
 source ~/.basher/lib/messages.sh
-source ~/.basher/lib/inihandler.sh
 
 # Init message
 printInfoMessage "Loading Basher for Linux..."
@@ -12,7 +11,7 @@ PATH="$PATH:~/.basher/bin"
 printMessage "* basher command included on PATH"
 
 # Launch basher boot services initialization
-. ~/.basher/src/boot/etc/init.sh
+~/.basher/src/boot/etc/init.sh
 
 # Finish and print post init warning
 printInfoMessage "Basher for Linux loaded"

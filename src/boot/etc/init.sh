@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Dependencies
+source ~/.basher/lib/messages.sh
+source ~/.basher/lib/inihandler.sh
+source ~/.basher/src/boot/lib/featureshandler.sh
+
 # BEGIN
 printMessage "Initializing services..."
 
@@ -15,8 +20,14 @@ commandsArray=(${commands// / })
 homeDir=~/.basher/src/
 for i in "${commandsArray[@]}"; do
     command=$(echo $i | sed -e "s|$homeDir||g")
-    if [ -f "$i"/etc/loader.sh ] && [ "$(getINIVar ~/.basher/src/boot/etc/features.ini $command)" = "on" ]; then
-        . "$i"/etc/loader.sh
+    if [ $(isFeature $command) -eq 1 ] && [ "$(getINIVar ~/.basher/src/boot/etc/features.ini $command)" = "on" ]; then
+        printMessage "Checking $command service status..."
+        if [ $(basher $command:status --output bool) -eq 1 ]; then
+            printMessage "$command service running"
+        else
+            printMessage "$command service not running"
+            basher $command:start --no-color --spacing none
+        fi
     fi
 done
 unset commands commandsArray homeDir i command
