@@ -2,7 +2,7 @@
 
 basher command controls actions allowed by Basher for Linux repository inclusion.
 
-## Commands and Components
+## Commands
 
 `basher help [?name]`
 

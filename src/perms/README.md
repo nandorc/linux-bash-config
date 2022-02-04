@@ -6,17 +6,13 @@ It needs **sudo** privileges to be executed.
 
 By default it assign **2775** access to folders, **0664** access to files and **0774** access to executable files.
 
-## Sintaxis
+## Commands
 
 `basher perms [?options] [path]`
 
 > If [path] is not defined or refers to a no existent file or folder path, an error will be displayed.
 
 ## Options
-
-`--help`
-
-> If this flag is sent, this information will be printed on screen. And nothing else will be done.
 
 `--defaults`
 

@@ -21,5 +21,5 @@ That's it! If all goes well you just have to restart your system and will be abl
 Basher for Linux stands on `basher` command. The most basic instruction to send once installed could be the following.
 
 ```
-basher --help
+basher help
 ```
