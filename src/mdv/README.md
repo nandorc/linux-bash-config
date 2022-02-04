@@ -1,4 +1,4 @@
-# basher mdv command
+# basher mdv
 
 This command allows to display Markdown files using pandoc or less.
 

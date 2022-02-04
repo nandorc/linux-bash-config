@@ -10,6 +10,9 @@ printInfoMessage "Loading Basher for Linux..."
 PATH="$PATH:~/.basher/bin"
 printMessage "* basher command included on PATH"
 
+# Load basher configurations
+. ~/.basher/src/config/etc/loader.sh
+
 # Launch basher boot services initialization
 ~/.basher/src/boot/etc/init.sh
 

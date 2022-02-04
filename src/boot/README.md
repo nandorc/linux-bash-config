@@ -1,4 +1,4 @@
-# basher boot command
+# basher boot
 
 This command allow users to manage on boot services checking and starting.
 

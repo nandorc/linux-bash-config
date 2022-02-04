@@ -1,4 +1,4 @@
-# basher wsl customization
+# basher wsl
 
 Provides aliases to ease use of WSL interoperability.
 
