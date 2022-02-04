@@ -13,7 +13,7 @@ function viewMDFile() {
     elif [ $can_use -eq 1 ]; then
         pandoc -f markdown -t plain "$1" | less -c
     else
-        printWarningMessage "pandoc is not installed! Trying to install it." before
+        printWarningMessage "* pandoc is not installed! Trying to install it." before
         installPandoc
         if [ $(canUsePandoc) -eq -1 ]; then
             printErrorMessage "pandoc installation failed. less will be used to show files." after
@@ -28,7 +28,7 @@ function viewMDFile() {
 
 # Create config.ini file if is first use
 if [ "$(getINIVar ~/.basher/src/mdv/etc/config.ini use_pandoc)" = "undefined" ]; then
-    printWarningMessage "basher mdv configuration not defined. Must define before using." before
+    printWarningMessage "* basher mdv configuration not defined. Must define before using." before
     ~/.basher/src/mdv/cmd/reset.sh
 fi
 

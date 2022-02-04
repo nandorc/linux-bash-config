@@ -1,4 +1,4 @@
-# basher perms command
+# basher perms
 
 This tool allow users to manage files and folders permissions and ownership based on `find`, `chmod` and `chown` commands.
 
