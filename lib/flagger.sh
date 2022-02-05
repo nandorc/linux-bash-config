@@ -7,7 +7,12 @@ function getFlagValue() {
     wantedFlag="$1" && shift
     while [ -n "$1" ]; do
         if [ "$1" = "$wantedFlag" ]; then
-            echo "$2" && break
+            if [ -z "$(echo $2 | grep "^-")" ]; then
+                echo "$2"
+            else
+                echo ""
+            fi
+            break
         else
             shift
         fi
