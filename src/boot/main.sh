@@ -11,6 +11,6 @@ elif [ "$1" == "enable" ]; then
 elif [ "$1" == "disable" ]; then
     ~/.basher/src/boot/cmd/disable.sh $(pruneFlag disable $*)
 else
-    printErrorMessage "No valid options received." before
+    printErrorMessage "No valid options received" before
     printWarningMessage "Type 'basher help boot' to know how to use the command" after
 fi
