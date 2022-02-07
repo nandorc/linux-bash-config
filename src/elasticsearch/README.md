@@ -4,9 +4,9 @@ Provides commands to manage elasticsearch service.
 
 ## Commands
 
-`basher elasticsearch:set-path`
+`basher elasticsearch:set-path [path]`
 
-> Ask for elasticsearch root folder path and store it.
+> Ask for elasticsearch root folder [path] and store it.
 
 `basher elasticsearch:status [?options]`
 
