@@ -1,6 +1,6 @@
 # basher mysql
 
-Provides variables and aliases to manage mysql service.
+Provides commands to manage mysql service.
 
 ## Commands
 
