@@ -36,6 +36,14 @@ Provides variables and aliases to manage apache2 service.
 > >
 > > When using 'string' output type, `--no-color` and `--spacing` options may be used.
 
+`basher apache:start [?options]`
+
+> Starts apache service
+>
+> [?options]
+>
+> > `--no-color` and `--spacing` may be used to controls message behaviour.
+
 ## Common [?options]
 
 `--no-color`
