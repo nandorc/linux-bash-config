@@ -44,6 +44,14 @@ Provides variables and aliases to manage apache2 service.
 >
 > > `--no-color` and `--spacing` may be used to controls message behaviour.
 
+`basher apache:stop [?options]`
+
+> Stops apache service
+>
+> [?options]
+>
+> > `--no-color` and `--spacing` may be used to controls message behaviour.
+
 ## Common [?options]
 
 `--no-color`
