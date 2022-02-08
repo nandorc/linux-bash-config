@@ -2,6 +2,14 @@
 
 Provides commands to manage jenkins service.
 
+## Aliases
+
+`jenkins-site`
+
+> Alias to wrap opening of main jenkins site using `explorer.exe` windows utility.
+>
+> It assumes that jenkins is configure to launch on `http://localhost:8081`.
+
 ## Commands
 
 `basher jenkins:status [?options]`
