@@ -13,9 +13,6 @@ fi
 
 configFeatures=$(cat ~/.basher/src/boot/var/features.ini)
 if [ -n "$configFeatures" ]; then
-    # BEGIN
-    printMessage "<ServicesInitialization>"
-
     # Dispatch initializations
     homeDir=~/.basher/src/
     featuresArray=(${configFeatures// / })
@@ -50,8 +47,5 @@ if [ -n "$configFeatures" ]; then
         unset feature featureName featureStatus
     done
     unset featuresArray homeDir i
-
-    # END
-    printMessage "</ServicesInitialization>"
 fi
 unset configFeatures

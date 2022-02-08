@@ -8,15 +8,15 @@ for i in "${commandsArray[@]}"; do
     command=$(echo $i | sed -e "s|$homeDir||g")
     if [ -f "$i"/etc/variables.sh ]; then
         . "$i"/etc/variables.sh
-        printMessage "* $command variables included"
+        printMessage " * $command variables included"
     fi
     if [ -f "$i"/etc/aliases.sh ]; then
         . "$i"/etc/aliases.sh
-        printMessage "* $command aliases included"
+        printMessage " * $command aliases included"
     fi
     if [ -f "$i"/etc/style.sh ]; then
         . "$i"/etc/style.sh
-        printMessage "* $command style included"
+        printMessage " * $command style included"
     fi
 done
 unset commands commandsArray homeDir i command
