@@ -1,6 +1,6 @@
 # basher lamp
 
-Provides commands to manage a LAMP environment.
+Provides commands to manage a LAMP environment (apache and mysql).
 
 ## Commands
 
