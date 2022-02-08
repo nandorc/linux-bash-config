@@ -4,6 +4,10 @@ This command allow users to manage on boot services checking and starting.
 
 ## Commands
 
+`basher boot:list` [?options]
+
+> Prints a list of current defined values for features.
+
 `basher boot:reset [?options]`
 
 > Reset stored values at features.ini file.
