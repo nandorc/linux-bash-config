@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Check and load dependencies
-if [ ! -d ~/.bash_utilities/lib ]; then
+if [ ! -d ~/.basher/lib ]; then
     echo -e "\nUnexpected error while trying to setup\n" && exit 1
 fi
-source ~/.bash_utilities/lib/ext/dsoft/messages.sh
+source ~/.basher/lib/messages.sh
 
 # Init message
 printInfoMessage "Starting Bash Utilities setup..." both
 
-# Validate existence of ~/.bash_utilities/etc/config.sh file
-if [ ! -f ~/.bash_utilities/etc/config.sh ]; then
+# Validate existence of ~/.basher/etc/config.sh file
+if [ ! -f ~/.basher/etc/config.sh ]; then
     printErrorMessage "Setup failed! Can't find config file." after && exit 1
 fi
 
@@ -21,9 +21,9 @@ if [ ! -f ~/.bash_aliases ]; then
 fi
 
 # Include config loading at ~/.bash_aliases if is not present.
-if [ -z "$(cat ~/.bash_aliases | grep '[ -f ~/.bash_utilities/etc/config.sh ] && . ~/.bash_utilities/etc/config.sh')" ]; then
+if [ -z "$(cat ~/.bash_aliases | grep '[ -f ~/.basher/etc/config.sh ] && . ~/.basher/etc/config.sh')" ]; then
     printMessage "Adding config loading at ~/.bash_aliases"
-    echo '[ -f ~/.bash_utilities/etc/config.sh ] && . ~/.bash_utilities/etc/config.sh' >>~/.bash_aliases
+    echo '[ -f ~/.basher/etc/config.sh ] && . ~/.basher/etc/config.sh' >>~/.bash_aliases
 else
     printWarningMessage "Bash Utilities is currently setted to work on this machine."
 fi
