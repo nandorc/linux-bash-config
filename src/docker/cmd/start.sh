@@ -7,11 +7,9 @@ serviceName="docker"
 options=$(getRebuildedOptions $*)
 printColoredMessage "Starting $serviceName service..." --wrap-position begin $options
 if [ $(basher $serviceName:status --output bool) -eq 1 ]; then
-    printMessage "* $serviceName service is currently running"
+    printColoredMessage " * $serviceName service is currently running" --wrap-postion end --no-color $options
 else
-    # Begin service starting process
     sudo service docker start
-    # End service starting process
+    printColoredMessage " * $serviceName service started" --wrap-position end --no-color $options
 fi
-printColoredMessage "starting process finished" --wrap-position end $options
 unset serviceName options

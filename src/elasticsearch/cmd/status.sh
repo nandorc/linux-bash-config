@@ -35,13 +35,12 @@ else
             stringResult="$stringResult not reachable"
         fi
         if [ "$output" = "string" ]; then
-            printMessage "* $stringResult"
+            printColoredMessage " * $stringResult" --wrap-position end --no-color $options
         elif [ -f ~/.basher/src/elasticsearch/var/http_response ]; then
-            cat ~/.basher/src/elasticsearch/var/http_response
+            printColoredMessage "$(cat ~/.basher/src/elasticsearch/var/http_response)" --wrap-position end --no-color $options
         else
-            printMessage "* elasticsearch service has no response. $stringResult"
+            printColoredMessage " * elasticsearch service has no response. $stringResult" --wrap-position end --no-color $options
         fi
-        printColoredMessage "operation completed" --wrap-position end $options
         unset stringResult
     fi
     unset options http_response_code boolResult

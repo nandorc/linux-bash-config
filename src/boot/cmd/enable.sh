@@ -11,7 +11,7 @@ printColoredMessage "Enabling features..." --wrap-position begin $options
 
 # Check features.ini file
 if [ ! -f ~/.basher/src/boot/etc/features.ini ]; then
-    printWarningMessage "* features.ini not set"
+    printWarningMessage " * features.ini not set"
     basher boot:reset --no-color --spacing none --no-restart
 fi
 
@@ -25,7 +25,7 @@ if [ -z "$params" ]; then
         command=$(echo $i | sed -e "s|$homeDir||g")
         if [ $(isFeature $command) -eq 1 ]; then
             setINIVar ~/.basher/src/boot/etc/features.ini $command on
-            printMessage "* $command was enabled to load on boot"
+            printMessage " * $command was enabled to load on boot"
         fi
     done
     unset commands commandsArray homeDir i command
@@ -34,9 +34,9 @@ else
     for i in "${paramsArray[@]}"; do
         if [ $(isFeature $i) -eq 1 ]; then
             setINIVar ~/.basher/src/boot/etc/features.ini $i on
-            printMessage "* $i was enabled to load on boot"
+            printMessage " * $i was enabled to load on boot"
         else
-            printWarningMessage "* $i is not a service name"
+            printWarningMessage " * $i is not a service name"
         fi
     done
     unset paramsArray i
@@ -44,6 +44,5 @@ fi
 unset params
 
 # End
-printColoredMessage "Features enabling process finished" --spacing none $(pruneFlagValue --spacing $options)
 printColoredMessage "You must restart your system to apply changes" --wrap-position end --type warning $(pruneFlag --no-color $options)
 unset options

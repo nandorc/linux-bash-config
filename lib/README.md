@@ -47,6 +47,7 @@
 >
 > - transformBeforeSpacing [spacing]
 > - transformAfterSpacing [spacing]
+> - applyAfterSpacing [options]
 > - printColoredMessage [message] [?options]
 > - getRebuildedOptions [params...]
 > - getOptionsPrunedParams [param...]
