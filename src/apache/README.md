@@ -1,6 +1,6 @@
 # basher apache
 
-Provides variables and aliases to manage apache2 service.
+Provides variables, aliases and commands to manage apache2 service.
 
 ## Variables
 

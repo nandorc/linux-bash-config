@@ -1,12 +1,16 @@
-# basher mysql
+# basher elasticsearch
 
-Provides commands to manage mysql service.
+Provides commands to manage elasticsearch service.
 
 ## Commands
 
-`basher mysql:status [?options]`
+`basher elasticsearch:set-path [path]`
 
-> Shows mysql service status
+> Ask for elasticsearch root folder [path] and store it.
+
+`basher elasticsearch:status [?options]`
+
+> Shows elasticsearch service status
 >
 > [?options]
 >
@@ -14,31 +18,31 @@ Provides commands to manage mysql service.
 >
 > > Set the expected output type.
 > >
-> > It must be 'string' or 'bool'.
+> > It must be 'string', 'response' or 'bool'.
 > >
 > > If nothing sent, 'string' will be used as default.
 > >
-> > When using 'string' output type, `--no-color` and `--spacing` options may be used.
+> > When using 'string' or 'response' output types, `--no-color` and `--spacing` options may be used.
 
-`basher mysql:start [?options]`
+`basher elasticsearch:start [?options]`
 
-> Starts mysql service
+> Starts elasticsearch service
 >
 > [?options]
 >
 > > `--no-color` and `--spacing` may be used to controls message behaviour.
 
-`basher mysql:stop [?options]`
+`basher elasticsearch:stop [?options]`
 
-> Stops mysql service
+> Stops elasticsearch service
 >
 > [?options]
 >
 > > `--no-color` and `--spacing` may be used to controls message behaviour.
 
-`basher mysql:restart [?options]`
+`basher elasticsearch:restart [?options]`
 
-> Restarts mysql service
+> Restarts elasticsearch service
 >
 > [?options]
 >

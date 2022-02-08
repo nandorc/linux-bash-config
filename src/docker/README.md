@@ -1,6 +1,6 @@
 # basher docker
 
-Provides variables and aliases to manage docker service.
+Provides commands to manage docker service.
 
 ## Commands
 
