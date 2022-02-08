@@ -24,6 +24,15 @@ function transformAfterSpacing() {
     fi
 }
 
+# $1 input options
+function applyAfterSpacing() {
+    spacing=$(getFlagValue --spacing $options)
+    if [ -z "$spacing" ] || [ "$spacing" = "both" ] || [ "$spacing" = "after" ]; then
+        echo ""
+    fi
+    unset spacing
+}
+
 # $1 message
 # $* options
 #   --spacing spacing
