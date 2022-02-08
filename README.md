@@ -1,4 +1,4 @@
-# Basher for Linux v3.0
+# Basher for Linux v3.1
 
 This repository is intended to provide a simple way to customize linux terminal behaviour and give linux users tools to execute some administration tasks easy. It was tested on WSL.
 
@@ -9,14 +9,12 @@ In order to install this tool, you must clone it at user directory (~) inside a 
 ```
 cd ~
 
-git clone -b v3.0 https://github.com/nandorc/linux-basher.git .basher
+git clone -b master https://github.com/nandorc/linux-basher.git .basher
 
 ~/.basher/setup.sh
 ```
 
-That's it! If all goes well you will be able to use the `basher` commands.
-
-In order to load `variables`, `aliases` and `styles` as well as to use auto-starting capabilities you just have to restart your system.
+That's it! If all goes well you just have to restart your system in order to use `basher` commands, `variables`, `aliases` and `styles` as well as to use auto-starting capabilities.
 
 ## Usage
 
