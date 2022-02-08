@@ -10,7 +10,7 @@ options=$(getRebuildedOptions $*)
 printColoredMessage "Enabling features..." --wrap-position begin $options
 
 # Check features.ini file
-if [ ! -f ~/.basher/src/boot/etc/features.ini ]; then
+if [ ! -f ~/.basher/src/boot/var/features.ini ]; then
     printWarningMessage " * features.ini not set"
     basher boot:reset --no-color --spacing none --no-restart
 fi
@@ -24,7 +24,7 @@ if [ -z "$params" ]; then
     for i in "${commandsArray[@]}"; do
         command=$(echo $i | sed -e "s|$homeDir||g")
         if [ $(isFeature $command) -eq 1 ]; then
-            setINIVar ~/.basher/src/boot/etc/features.ini $command on
+            setINIVar ~/.basher/src/boot/var/features.ini $command on
             printMessage " * $command was enabled to load on boot"
         fi
     done
@@ -33,7 +33,7 @@ else
     paramsArray=(${params// / })
     for i in "${paramsArray[@]}"; do
         if [ $(isFeature $i) -eq 1 ]; then
-            setINIVar ~/.basher/src/boot/etc/features.ini $i on
+            setINIVar ~/.basher/src/boot/var/features.ini $i on
             printMessage " * $i was enabled to load on boot"
         else
             printWarningMessage " * $i is not a service name"
