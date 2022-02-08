@@ -3,12 +3,11 @@
 # Dependencies
 source ~/.basher/lib/wrapper.sh
 
-serviceName="lamp"
 options=$(getRebuildedOptions $*)
-printColoredMessage "Starting $serviceName services..." --wrap-position begin $options
+printColoredMessage "<LAMPServicesStart>" --wrap-position begin $options
 # Begin service starting process
 basher apache:start --no-color --spacing none
 basher mysql:start --no-color --spacing none
 # End service starting process
-printColoredMessage "starting process finished" --wrap-position end $options
-unset serviceName options
+printColoredMessage "</LAMPServicesStart>" --wrap-position end $options
+unset options

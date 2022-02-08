@@ -13,7 +13,6 @@ else
     if [[ "$(service docker status)" =~ "is not running" ]]; then
         boolResult=0
     fi
-    # End boolean service validation
     if [ "$output" = "bool" ]; then
         echo $boolResult
     else
@@ -21,11 +20,10 @@ else
         serviceName="docker"
         options=$(getRebuildedOptions $*)
         printColoredMessage "Checking $serviceName service status..." --wrap-position begin $options
-        stringResult="* $serviceName service is not running"
-        [ $boolResult -eq 1 ] && stringResult="* $serviceName is running"
-        printColoredMessage "$stringResult" --wrap-position end --no-color $(pruneFlag --no-color $options)
+        stringResult=" * $serviceName service is not running"
+        [ $boolResult -eq 1 ] && stringResult=" * $serviceName is running"
+        printColoredMessage "$stringResult" --wrap-position end --no-color $options
         unset serviceName options stringResult
-        # end string result
     fi
     unset boolResult
 fi

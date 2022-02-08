@@ -21,11 +21,10 @@ else
         serviceName="lamp"
         options=$(getRebuildedOptions $*)
         printColoredMessage "Checking $serviceName services status..." --wrap-position begin $options
-        stringResult="* At least one $serviceName service is not running"
-        [ $boolResult -eq 1 ] && stringResult="* All $serviceName services are running"
-        printColoredMessage "$stringResult" --wrap-position end --no-color $(pruneFlag --no-color $options)
+        stringResult=" * At least one $serviceName service is not running"
+        [ $boolResult -eq 1 ] && stringResult=" * All $serviceName services are running"
+        printColoredMessage "$stringResult" --wrap-position end --no-color $options
         unset serviceName options stringResult
-        # end string result
     fi
     unset boolResult
 fi

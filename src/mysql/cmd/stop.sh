@@ -7,11 +7,9 @@ serviceName="mysql"
 options=$(getRebuildedOptions $*)
 printColoredMessage "Stoping $serviceName service..." --wrap-position begin $options
 if [ $(basher $serviceName:status --output bool) -eq 0 ]; then
-    printMessage "* $serviceName service is currently stopped"
+    printColoredMessage " * $serviceName service is currently stopped" --wrap-position end --no-color $options
 else
-    # Begin service starting process
     sudo service mysql stop
-    # End service starting process
+    printColoredMessage " * $serviceName service stoped" --wrap-position end --no-color $options
 fi
-printColoredMessage "stopping process finished" --wrap-position end $options
 unset serviceName options

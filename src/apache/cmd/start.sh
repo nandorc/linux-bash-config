@@ -3,15 +3,19 @@
 # Dependencies
 source ~/.basher/lib/wrapper.sh
 
-serviceName="apache"
+# Format command options
 options=$(getRebuildedOptions $*)
-printColoredMessage "Starting $serviceName service..." --wrap-position begin $options
-if [ $(basher $serviceName:status --output bool) -eq 1 ]; then
-    printMessage "* $serviceName service is currently running"
+
+# Begining message
+printColoredMessage "Starting apache service..." --wrap-position begin $options
+
+# Check and start service
+if [ $(basher apache:status --output bool) -eq 1 ]; then
+    printColoredMessage " * apache service is currently running" --wrap-position end --no-color $options
 else
-    # Begin service starting process
     sudo service apache2 start
-    # End service starting process
+    printColoredMessage " * apache service started" --wrap-position end --no-color $options
 fi
-printColoredMessage "starting process finished" --wrap-position end $options
-unset serviceName options
+
+# Clean variables
+unset options

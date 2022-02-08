@@ -10,6 +10,6 @@ printColoredMessage "Getting currently defined values at features.ini file..." -
 if [ -z "$current_values" ]; then
     printColoredMessage "No values defined" --wrap-position end --type warning $(pruneFlag --no-color $options)
 else
-    printColoredMessage "$current_values" --wrap-position end --no-color $(pruneFlag --no-color $options)
+    printColoredMessage "$current_values" --wrap-position end --no-color $options
 fi
 unset options current_values
