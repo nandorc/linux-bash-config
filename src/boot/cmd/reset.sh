@@ -15,13 +15,13 @@ if [ ! -d ~/.basher/src/boot/etc ]; then
 fi
 
 # Delete current features.ini file if exists
-if [ -f ~/.basher/src/boot/etc/features.ini ]; then
-    rm -rf ~/.basher/src/boot/etc/features.ini
+if [ -f ~/.basher/src/boot/var/features.ini ]; then
+    rm -rf ~/.basher/src/boot/var/features.ini
     printMessage " * current features.ini file deleted"
 fi
 
 # Create new features.ini
-touch ~/.basher/src/boot/etc/features.ini
+touch ~/.basher/src/boot/var/features.ini
 printMessage " * new features.ini file created"
 
 # Unset variables and end message
