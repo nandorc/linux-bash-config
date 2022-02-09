@@ -15,7 +15,7 @@ function installPandoc() {
 #    0 :: pandoc can't be used
 #   -1 :: pandoc can be used but is not installed
 function canUsePandoc() {
-    use_pandoc=$(getINIVar ~/.basher/src/mdv/etc/config.ini use_pandoc)
+    use_pandoc=$(getINIVar ~/.basher/src/mdv/var/config.ini use_pandoc)
     if [ -z "$use_pandoc" ] || [ "$use_pandoc" = "undefined" ] || [ $use_pandoc -eq 0 ]; then
         echo 0
     elif [ -z "$(whereis pandoc | sed -e "s/pandoc://" -e "s/ //g")" ]; then

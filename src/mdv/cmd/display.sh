@@ -18,7 +18,7 @@ else
         installPandoc
         if [ $(canUsePandoc) -eq -1 ]; then
             printErrorMessage "pandoc installation failed so less will be used to show files" after
-            setINIVar ~/.basher/src/mdv/etc/config.ini use_pandoc 0
+            setINIVar ~/.basher/src/mdv/var/config.ini use_pandoc 0
         else
             printInfoMessage "pandoc was intalled!" after
         fi
