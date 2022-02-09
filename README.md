@@ -1,4 +1,4 @@
-# Basher for Linux v3.1
+# Basher for Linux v3.2
 
 This repository is intended to provide a simple way to customize linux terminal behaviour and give linux users tools to execute some administration tasks easy. It was tested on WSL.
 
