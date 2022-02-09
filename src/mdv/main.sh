@@ -6,7 +6,7 @@ source ~/.basher/lib/inihandler.sh
 
 # Create config.ini file if is first use
 path="$1"
-if [ "$(getINIVar ~/.basher/src/mdv/etc/config.ini use_pandoc)" = "undefined" ]; then
+if [ "$(getINIVar ~/.basher/src/mdv/var/config.ini use_pandoc)" = "undefined" ]; then
     printWarningMessage "* basher mdv configuration not defined" before
     ~/.basher/src/mdv/cmd/reset.sh
 elif [ "$1" = "--reset" ]; then

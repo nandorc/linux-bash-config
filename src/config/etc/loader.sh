@@ -18,5 +18,9 @@ for i in "${commandsArray[@]}"; do
         . "$i"/etc/style.sh
         printMessage " * $command style included"
     fi
+    if [ -f "$i"/etc/settings.sh ]; then
+        . "$i"/etc/settings.sh
+        printMessage " * $command settings included"
+    fi
 done
 unset commands commandsArray homeDir i command
