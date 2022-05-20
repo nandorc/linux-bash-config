@@ -14,7 +14,7 @@ git clone -b master https://github.com/nandorc/linux-basher.git .basher
 ~/.basher/setup.sh
 ```
 
-That's it! If all goes well you just have to restart your system in order to use `basher` commands, `variables`, `aliases` and `styles` as well as to use auto-starting capabilities.
+That's it! If all goes well you just have to restart your system in order to use `basher` commands, `variables`, `aliases` and `styles`.
 
 ## Usage
 
