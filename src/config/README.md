@@ -1,3 +1,3 @@
 # basher config
 
-Controls variables, aliases and styles loading on boot process.
+Controls loading of variables, aliases, styles and settings on boot process.
