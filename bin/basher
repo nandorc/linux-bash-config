@@ -1,14 +1,10 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.basher/lib/messages.sh
+source ~/.basher/etc/colors.sh
 source ~/.basher/lib/flagger.sh
 
-command=(${1//:/ })
-if [ -f ~/.basher/src/"${command[0]}"/main.sh ]; then
-    ~/.basher/src/"${command[0]}"/main.sh ${command[1]} $(pruneFlag $1 $*)
-else
-    printErrorMessage "No valid parameters received" before
-    printWarningMessage "Use 'basher help' to get info about the tool" after
-fi
-unset command
+commands_array=(${1//:/ })
+[ -z "${commands_array[0]}" ] && echo -e "\n"$color_red"Execution Exception: "$color_none"No parameters received\nUse "$color_yellow"basher help"$color_none" to know how to use the tool\n" && exit 1
+[ ! -f ~/.basher/src/"${commands_array[0]}"/main.sh ] && echo -e "\n"$color_red"Execution Exception: "$color_yellow"${commands_array[0]}"$color_none" is not a valid executable command\nUse "$color_yellow"basher help:list"$color_none" to get the list of commands\n" && exit 1
+~/.basher/src/"${commands_array[0]}"/main.sh ${commands_array[1]} $(pruneFlag $1 $*)
