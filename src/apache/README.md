@@ -33,43 +33,15 @@ Provides variables, aliases and commands to manage apache2 service.
 > > It must be 'string' or 'bool'.
 > >
 > > If nothing sent, 'string' will be used as default.
-> >
-> > When using 'string' output type, `--no-color` and `--spacing` options may be used.
 
-`basher apache:start [?options]`
+`basher apache:start`
 
 > Starts apache service
->
-> [?options]
->
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
 
-`basher apache:stop [?options]`
+`basher apache:stop`
 
 > Stops apache service
->
-> [?options]
->
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
 
-`basher apache:restart [?options]`
+`basher apache:restart`
 
 > Restarts apache service
->
-> [?options]
->
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
-
-## Common [?options]
-
-`--no-color`
-
-> Points to not use colors on messages.
-
-`--spacing [spacing]`
-
-> Referes to blank lines to be used around command execution messages.
->
-> Spacing must be 'none', 'before', 'after' or 'both'.
->
-> 'both' is used by default.
