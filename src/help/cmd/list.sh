@@ -4,7 +4,7 @@
 source ~/.basher/lib/colorhandler.sh
 
 # Show title
-echo -e "\n$(color blue)Available $(color yellow)basher$(color blue) commands and components$(color none)\n"
+echo -e "\n$(color blue)Available $(color yellow)basher$(color blue) commands and components$(color)\n"
 commands=$(find ~/.basher/src/* -maxdepth 0 -type d)
 commands_array=(${commands// / })
 homeDir=~/.basher/src/
@@ -14,6 +14,6 @@ for i in "${commands_array[@]}"; do
     [ ${#command} -lt 8 ] && message="$message\t"
     message="$message:\t"
     [ -d ~/.basher/src/"$command"/cmd ] && message="$message[CMD] "
-    echo -e $message"For complete reference type $(color yellow)basher help $command$(color none)"
+    echo -e $message"For complete reference type $(color yellow)basher help $command$(color)"
 done
 echo ""
