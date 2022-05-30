@@ -1,14 +1,19 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.basher/lib/messages.sh
+source ~/.basher/lib/colorhandler.sh
 source ~/.basher/lib/flagger.sh
 
-command=(${1//:/ })
-if [ -f ~/.basher/src/"${command[0]}"/main.sh ]; then
-    ~/.basher/src/"${command[0]}"/main.sh ${command[1]} $(pruneFlag $1 $*)
-else
-    printErrorMessage "No valid parameters received" before
-    printWarningMessage "Use 'basher help' to get info about the tool" after
-fi
-unset command
+# Get command data
+commands_array=(${1//:/ })
+command_name=${commands_array[0]}
+[ -z "$command_name" ] && echo -e "\n$(color red)Execution Exception:$(color) No parameters received\nUse $(color yellow)basher help$(color) to know how to use the tool\n" && exit 1
+[ ! -d ~/.basher/src/"$command_name"/cmd ] && echo -e "\n$(color red)Execution Exception: $(color yellow)$command_name$(color) is not a valid executable command\nUse $(color yellow)basher help:list$(color) to get the list of commands\n" && exit 1
+command_action=${commands_array[1]}
+[ -z "$command_action" ] && [ -f ~/.basher/src/"$command_name"/cmd/default.sh ] && command_action="default"
+[ -z "$command_action" ] && echo -e "\n$(color red)Execution Exception:$(color) No valid action received for $(color yellow)$command_name$(color) command\nUse $(color yellow)basher help $command_name$(color) to know how to use it\n" && exit 1
+[ ! -f ~/.basher/src/"$command_name"/cmd/"$command_action".sh ] && echo -e "\n$(color red)Execution Exception:$(color) Command $(color yellow)basher $command_name:$command_action$(color) not found\nUse $(color yellow)basher help $command_name$(color) to read more about it\n" && exit 1
+command_options=$(pruneFlag $1 $*)
+
+# Send command
+~/.basher/src/"$command_name"/cmd/"$command_action".sh $command_options

@@ -1,31 +1,26 @@
 #!/bin/bash
 
-# Dependencies
-source ~/.basher/lib/wrapper.sh
+# Load dependencies
+source ~/.basher/lib/servicehandler.sh
+source ~/.basher/lib/flagger.sh
 
-# Check output type
-output=$(getFlagValue --output $*)
-if [ $(hasFlag --output $*) -eq 1 ] && [ -n "$output" ] && [ "$output" != "string" ] && [ "$output" != "bool" ]; then
-    printErrorMessage "No valid --output value received" both
-else
-    # Set default output value if necessary
-    [ -z "$output" ] && output="string"
+# Check parameters
+declare service_name="apache"
+declare options=$*
+declare output=$(getFlagValue --output ${options}) && options=$(pruneFlagValue --output ${options})
+declare no_spaces=$(hasFlag --no-spaces ${options}) && options=$(pruneFlag --no-spaces ${options})
+[ -n "${options}" ] && noValidOptionsException ${service_name} ${no_spaces} ${no_spaces}
+[ "${output}" != "string" ] && [ "${output}" != "bool" ] && output=string
 
-    # Get boolean service status
-    boolStatus=1
-    [[ "$(service apache2 status)" =~ "is not running" ]] && boolStatus=0
+# Get boolean service status
+declare bool_status=1
+declare is_running=$(service apache2 status |& grep "is running")
+[ -z "${is_running}" ] && bool_status=0
 
-    # Check and display output
-    if [ "$output" = "bool" ]; then
-        echo $boolStatus
-    else
-        options=$(getRebuildedOptions $*)
-        printColoredMessage "Checking apache service status..." --wrap-position begin $options
-        stringStatus=" * apache service is not running"
-        [ $boolStatus -eq 1 ] && stringStatus=" * apache is running"
-        printColoredMessage "$stringStatus" --wrap-position end --no-color $options
-        unset serviceName options stringStatus
-    fi
-    unset boolStatus
-fi
-unset output
+# Return bool status if requested
+[ "${output}" = "bool" ] && echo ${bool_status} && exit
+
+# Return string status
+[ ${bool_status} -eq 1 ] && wrap "$(color green)[RUNNING] $(color)\c" ${no_spaces} 1 0 0
+[ ${bool_status} -eq 0 ] && wrap "$(color red)[STOPED]  $(color)\c" ${no_spaces} 1 0 0
+wrap "$(color cyan) ${service_name} service$(color)" 1 ${no_spaces} 0 0

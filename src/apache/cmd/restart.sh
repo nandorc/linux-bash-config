@@ -1,23 +1,30 @@
 #!/bin/bash
 
-# Dependencies
-source ~/.basher/lib/wrapper.sh
+# Load dependencies
+source ~/.basher/lib/servicehandler.sh
+source ~/.basher/lib/flagger.sh
 
-# Format command options
-options=$(getRebuildedOptions $*)
+# Check parameters
+declare service_name="apache"
+declare options=$*
+declare no_spaces=$(hasFlag --no-spaces ${options}) && options=$(pruneFlag --no-spaces ${options})
+declare is_compact=$(hasFlag --compact ${options}) && options=$(pruneFlag --compact ${options})
+[ -n "${options}" ] && noValidOptionsException ${service_name} ${no_spaces} ${no_spaces}
 
-# Begining message
-printColoredMessage "<ApacheServiceRestart>" --wrap-position begin $options
-
-# Check and restart service
-if [ $(basher apache:status --output bool) -eq 1 ]; then
-    basher apache:stop --no-color --spacing none && basher apache:start --no-color --spacing none
+# Ask for sudo privileges if necessary to try to restart service
+wrap "$(color light-blue)INF~$(color) You may need to type your $(color cyan)sudo$(color) password to continue" ${no_spaces} 1 ${is_compact} 0
+sudo echo -e "EXE~ Trying to restart ${service_name} service...\c"
+if [ $? -eq 0 ]; then
+    declare res_cod=0
+    if [ $(basher "${service_name}":status --output bool) -eq 1 ]; then
+        tmp=$(basher "${service_name}":stop 2>&1)
+        res_cod=$?
+        [ ${res_cod} -ne 0 ] && processResponse ${res_cod} && genericException "${service_name} couldn't be stopped so restart process was aborted" 1 ${no_spaces}
+    fi
+    tmp=$(basher "${service_name}":start 2>&1)
+    res_cod=$?
+    [ ${res_cod} -ne 0 ] && echo -e "$(getResponseMessage ${res_cod})" && genericException "${service_name} couldn't be started so restart process was aborted" 1 ${no_spaces}
+    wrap "$(getResponseMessage ${res_cod})" 1 ${no_spaces} 0 0 && exit
 else
-    basher apache:start --no-color --spacing none
+    noSudoPrivilegesException 1 ${no_spaces}
 fi
-
-# Ending message
-printColoredMessage "</ApacheServiceRestart>" --wrap-position end $options
-
-# Clean variables
-unset options

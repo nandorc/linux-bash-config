@@ -1,33 +1,28 @@
 #!/bin/bash
 
 # Check and load dependencies
-if [ ! -d ~/.basher/lib ]; then
-    echo -e "\nUnexpected error while trying to setup\n" && exit 1
-fi
-source ~/.basher/lib/messages.sh
+[ ! -d ~/.basher/lib ] && echo -e "\nUnexpected error while trying to setup Basher for Linux tool\n" && exit 1
+source ~/.basher/lib/colorhandler.sh
 
 # Init message
-printInfoMessage "Starting Bash Utilities setup..." both
+echo -e "\n$(color green)START:$(color) Basher for Linux setup"
 
-# Validate existence of ~/.basher/etc/config.sh file
-if [ ! -f ~/.basher/etc/config.sh ]; then
-    printErrorMessage "Setup failed! Can't find config file." after && exit 1
-fi
+# Validate existence of ~/.basher/etc/loader.sh file
+[ ! -f ~/.basher/etc/loader.sh ] && echo -e "$(color red)FAIL:$(color) Can't find loader file\n" && exit 1
 
 # Create ~/.bash_aliases if not exists
 if [ ! -f ~/.bash_aliases ]; then
-    printWarningMessage "No ~/.bash_aliases file found. One will be created."
+    echo -e "$(color yellow)WARNING:$(color) No $(color yellow)~/.bash_aliases$(color) file found"
     touch ~/.bash_aliases
+    echo -e "$(color blue)INFO:$(color) New $(color yellow)~/.bash_aliases$(color) created"
 fi
 
 # Include config loading at ~/.bash_aliases if is not present.
-if [ -z "$(cat ~/.bash_aliases | grep '[ -f ~/.basher/etc/config.sh ] && . ~/.basher/etc/config.sh')" ]; then
-    printMessage "Adding config loading at ~/.bash_aliases"
-    echo '[ -f ~/.basher/etc/config.sh ] && . ~/.basher/etc/config.sh' >>~/.bash_aliases
+if [ -z "$(cat ~/.bash_aliases | grep '[ -f ~/.basher/etc/loader.sh ] && . ~/.basher/etc/loader.sh')" ]; then
+    echo '[ -f ~/.basher/etc/loader.sh ] && . ~/.basher/etc/loader.sh' >>~/.bash_aliases
+    echo -e "$(color blue)INFO:$(color) Configuration loading instruction added at $(color yellow)~/.bash_aliases$(color)"
+    echo -e "$(color green)FINISH:$(color) Basher for Linux setted correctly"
+    echo -e "$(color blue)INFO:$(color) You must restart to apply changes or you can execute $(color yellow)source ~/.basher/etc/loader.sh$(color) to start using Basher for Linux\n"
 else
-    printWarningMessage "Bash Utilities is currently setted to work on this machine."
+    echo -e "$(color green)FINISH:$(color) Basher for Linux is currently setted to work on this machine\n"
 fi
-
-# End message
-printInfoMessage "Bash Utilities setup finished." before
-printMessage "You must restart to apply changes and start using Bash Utilities." after

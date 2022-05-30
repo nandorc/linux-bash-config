@@ -1,18 +1,19 @@
 #!/bin/bash
 
-# Dependencies
-source ~/.basher/lib/messages.sh
+# Load dependencies
+source ~/.basher/lib/colorhandler.sh
 
-# BEGIN
-printInfoMessage "Available basher commands and components" before
+# Show title
+echo -e "\n$(color blue)Available $(color yellow)basher$(color blue) commands and components$(color)\n"
 commands=$(find ~/.basher/src/* -maxdepth 0 -type d)
-commandsArray=(${commands// / })
+commands_array=(${commands// / })
 homeDir=~/.basher/src/
-for i in "${commandsArray[@]}"; do
+for i in "${commands_array[@]}"; do
     command=$(echo $i | sed -e "s|$homeDir||g")
     message="$command\t"
     [ ${#command} -lt 8 ] && message="$message\t"
-    printMessage "$message:\tFor complete reference type 'basher help $command'"
+    message="$message:\t"
+    [ -d ~/.basher/src/"$command"/cmd ] && message="$message[CMD] "
+    echo -e $message"For complete reference type $(color yellow)basher help $command$(color)"
 done
 echo ""
-unset commands commandsArray homeDir i command message
