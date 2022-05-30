@@ -1,23 +1,24 @@
 #!/bin/bash
 
 # Load dependencies
-source ~/.basher/etc/colors.sh
+source ~/.basher/lib/servicehandler.sh
+source ~/.basher/lib/flagger.sh
 
-[ $(basher apache:status --output bool) -eq 0 ] && echo -e "Detenido"
+# Check parameters
+declare service_name="apache"
+declare options=$*
+declare no_spaces=$(hasFlag --no-spaces ${options}) && options=$(pruneFlag --no-spaces ${options})
+declare is_compact=$(hasFlag --compact ${options}) && options=$(pruneFlag --compact ${options})
+[ -n "${options}" ] && noValidOptionsException ${service_name} ${no_spaces} ${no_spaces}
 
-# source ~/.basher/lib/wrapper.sh
-
-# # Format command options
-# options=$(getRebuildedOptions $*)
-
-# # Begining message
-# printColoredMessage "Stoping apache service..." --wrap-position begin $options
-
-# # Check and stop service
-# if [ $(basher apache:status --output bool) -eq 0 ]; then
-#     printColoredMessage " * apache service is currently stopped" --wrap-position end --no-color $options
-# else
-#     sudo service apache2 stop
-#     printColoredMessage " * apache service stopped" --wrap-position end --no-color $options
-# fi
-# unset serviceName options
+# Check and stop service if necessary
+[ $(basher "${service_name}":status --output bool) -eq 0 ] && wrap "$(color light-blue)INF~$(color) ${service_name} service is currently stopped" ${no_spaces} ${no_spaces} 0 0 && exit
+wrap "$(color light-blue)INF~$(color) You may need to type your $(color cyan)sudo$(color) password to continue" ${no_spaces} 1 ${is_compact} 0
+sudo echo -e "EXE~ Trying to stop ${service_name} service...\c"
+if [ $? -eq 0 ]; then
+    tmp=$(sudo service apache2 stop 2>&1)
+    res_cod=$?
+    wrap "$(getResponseMessage ${res_cod})" 1 ${no_spaces} 0 0 && exit ${res_cod}
+else
+    noSudoPrivilegesException 1 ${no_spaces}
+fi
