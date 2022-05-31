@@ -2,27 +2,27 @@
 
 # Check and load dependencies
 [ ! -d ~/.basher/lib ] && echo -e "\nUnexpected error while trying to setup Basher for Linux tool\n" && exit 1
-source ~/.basher/lib/colorhandler.sh
+source ~/.basher/lib/messagehandler.sh
 
 # Init message
-echo -e "\n$(color green)START:$(color) Basher for Linux setup"
+commandBlockHeading "BASHER FOR LINUX SETUP" 1 0
 
 # Validate existence of ~/.basher/etc/loader.sh file
-[ ! -f ~/.basher/etc/loader.sh ] && echo -e "$(color red)FAIL:$(color) Can't find loader file\n" && exit 1
+[ ! -f ~/.basher/etc/loader.sh ] && genericException "Can't find loader file" 0 1 
 
 # Create ~/.bash_aliases if not exists
 if [ ! -f ~/.bash_aliases ]; then
-    echo -e "$(color yellow)WARNING:$(color) No $(color yellow)~/.bash_aliases$(color) file found"
+    genericWarnMessage "No $(color yellow)~/.bash_aliases$(color) file found" 0 0
     touch ~/.bash_aliases
-    echo -e "$(color blue)INFO:$(color) New $(color yellow)~/.bash_aliases$(color) created"
+    genericInfoMessage "New $(color yellow)~/.bash_aliases$(color) created" 0 0
 fi
 
 # Include config loading at ~/.bash_aliases if is not present.
 if [ -z "$(cat ~/.bash_aliases | grep '[ -f ~/.basher/etc/loader.sh ] && . ~/.basher/etc/loader.sh')" ]; then
     echo '[ -f ~/.basher/etc/loader.sh ] && . ~/.basher/etc/loader.sh' >>~/.bash_aliases
-    echo -e "$(color blue)INFO:$(color) Configuration loading instruction added at $(color yellow)~/.bash_aliases$(color)"
-    echo -e "$(color green)FINISH:$(color) Basher for Linux setted correctly"
-    echo -e "$(color blue)INFO:$(color) You must restart to apply changes or you can execute $(color yellow)source ~/.basher/etc/loader.sh$(color) to start using Basher for Linux\n"
+    genericInfoMessage "Configuration loading instruction added at $(color yellow)~/.bash_aliases$(color)" 0 0
+    genericInfoMessage "Basher for Linux setted correctly" 0 0
+    genericInfoMessage "You must restart to apply changes or you can execute $(color yellow)source ~/.basher/etc/loader.sh$(color) to start using Basher for Linux" 0 1
 else
-    echo -e "$(color green)FINISH:$(color) Basher for Linux is currently setted to work on this machine\n"
+    genericInfoMessage "Basher for Linux is currently setted to work on this machine" 0 1
 fi
