@@ -27,31 +27,47 @@ function wrap() {
     return 0
 }
 
-# Returns a string based on response code
-# $1 res_cod
-function getResponseString() {
-    declare res_cod
-    res_cod=$1
-    [ $res_cod -eq 0 ] && echo "$(color green)DONE$(color)"
-    [ $res_cod -ne 0 ] && echo "$(color red)FAIL$(color)"
+# Displays a generic information message
+# $1 message
+# $2 has_space_before
+# $3 has_space_after
+function genericInfoMessage() {
+    declare message has_space_before has_space_after
+    message=$1 && has_space_before=$2 && has_space_after=$3
+    wrap "$(color light-blue)INF~$(color) ${message}" "${has_space_before}" "${has_space_after}" 0 0
     return 0
 }
 
-# Displays a message based on response code
-# $1 res_cod
-function showResponseString() {
-    declare res_cod
-    res_cod=$1
-    echo -e "$(getResponseString ${res_cod})"
+# Displays a generic warning message
+# $1 message
+# $2 has_space_before
+# $3 has_space_after
+function genericWarnMessage() {
+    declare message has_space_before has_space_after
+    message=$1 && has_space_before=$2 && has_space_after=$3
+    wrap "$(color yellow)WRN~$(color) ${message}" "${has_space_before}" "${has_space_after}" 0 0
     return 0
 }
 
-# Get a generic message to point user to helper command
-# $1 command_name
-function getCommandHelpInfoMessage() {
-    declare command_name
-    command_name=$1
-    echo "$(color light-blue)INF~$(color) Type $(color yellow)basher help ${command_name}$(color) to know how to use the command"
+# Displays a generic error message
+# $1 message
+# $2 has_space_before
+# $3 has_space_after
+function genericErrorMessage() {
+    declare message has_space_before has_space_after
+    message=$1 && has_space_before=$2 && has_space_after=$3
+    wrap "$(color red)ERR~$(color) ${message}" "${has_space_before}" "${has_space_after}" 0 0
+    return 0
+}
+
+# Displays a generic execution message
+# $1 message
+# $2 has_space_before
+# $3 has_space_after
+function genericExecutionMessage() {
+    declare message has_space_before has_space_after
+    message=$1 && has_space_before=$2 && has_space_after=$3
+    wrap "EXE~ ${message}" "${has_space_before}" "${has_space_after}" 0 0
     return 0
 }
 
@@ -66,6 +82,27 @@ function commandBlockHeading() {
     return 0
 }
 
+# Displays a string based on response code
+# $1 res_cod
+function responseString() {
+    declare res_cod
+    res_cod=$1
+    [ $res_cod -eq 0 ] && echo -e "$(color green)DONE$(color)"
+    [ $res_cod -ne 0 ] && echo -e "$(color red)FAIL$(color)"
+    return 0
+}
+
+# Get a generic message to point user to helper command
+# $1 command_name
+# $2 has_space_before
+# $3 has_space_after
+function commandHelpInfoMessage() {
+    declare command_name has_space_before has_space_after
+    command_name=$1 && has_space_before=$2 && has_space_after=$3
+    genericInfoMessage "Type $(color yellow)basher help ${command_name}$(color) to know how to use the command" "${has_space_before}" "${has_space_after}"
+    return 0
+}
+
 # Displays an Exception
 # $1 message
 # $2 has_space_before
@@ -73,7 +110,7 @@ function commandBlockHeading() {
 function genericException() {
     declare message has_space_before has_space_after
     message=$1 && has_space_before=$2 && has_space_after=$3
-    wrap "$(color red)ERR~$(color) ${message}" "${has_space_before}" "${has_space_after}" 0 1
+    wrap "$(genericErrorMessage "${message}" 0 0)" "${has_space_before}" "${has_space_after}" 0 1
     return 0
 }
 
@@ -84,7 +121,7 @@ function genericException() {
 function noValidOptionsException() {
     declare command_name has_space_before has_space_after
     command_name=$1 && has_space_before=$2 && has_space_after=$3
-    genericException "No valid parameters sent to command\n$(getCommandHelpInfoMessage "${command_name}")" "${has_space_before}" "${has_space_after}"
+    genericException "No valid parameters sent to command\n$(commandHelpInfoMessage "${command_name}" 0 0)" "${has_space_before}" "${has_space_after}"
     return 0
 }
 
