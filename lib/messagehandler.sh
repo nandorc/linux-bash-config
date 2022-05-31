@@ -96,6 +96,17 @@ function genericExecutionMessage() {
     return 0
 }
 
+# Displays a message to point user to type sudo password if necessary
+# $1 has_space_before
+# $2 has_space_after
+# $3 is_silent
+function mayNeedSudoMessage() {
+    declare has_space_before has_space_after is_silent
+    has_space_before=$1 && has_space_after=$2 && is_silent=$3
+    wrap "$(genericInfoMessage "You may need to type your $(color cyan)sudo$(color) password to continue" 0 0)" "${has_space_before}" "${has_space_after}" "${is_silent}" 0
+    return 0
+}
+
 # Displays command block heading
 # $1 message
 # $2 has_space_before
