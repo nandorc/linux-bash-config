@@ -55,6 +55,17 @@ function getCommandHelpInfoMessage() {
     return 0
 }
 
+# Displays command block heading
+# $1 message
+# $2 has_space_before
+# $3 has_space_after
+function commandBlockHeading() {
+    declare message has_space_before has_space_after
+    message=$1 && has_space_before=$2 && has_space_after=$3
+    wrap "$(color tx-italic green)${message}$(color)" "${has_space_before}" "${has_space_after}" 0 0
+    return 0
+}
+
 # Displays an Exception
 # $1 message
 # $2 has_space_before
