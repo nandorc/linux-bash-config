@@ -1,19 +1,22 @@
 #!/bin/bash
 
 # Dependencies
-source ~/.basher/lib/colorhandler.sh
-source ~/.basher/lib/flagger.sh
+source ~/.basher/lib/messagehandler.sh
+source ~/.basher/lib/flaghandler.sh
 
 # Get command data
+declare commands_array command_name command_action command_options help_command_message help_list_command_message
+help_command_message=$(genericInfoMessage "Use $(color yellow)basher help$(color) to know how to use the tool" 0 0)
+help_list_command_message=$(genericInfoMessage "Use $(color yellow)basher help:list$(color) to get the list of commands" 0 0)
 commands_array=(${1//:/ })
 command_name=${commands_array[0]}
-[ -z "$command_name" ] && echo -e "\n$(color red)Execution Exception:$(color) No parameters received\nUse $(color yellow)basher help$(color) to know how to use the tool\n" && exit 1
-[ ! -d ~/.basher/src/"$command_name"/cmd ] && echo -e "\n$(color red)Execution Exception: $(color yellow)$command_name$(color) is not a valid executable command\nUse $(color yellow)basher help:list$(color) to get the list of commands\n" && exit 1
+[ -z "${command_name}" ] && genericException "No parameters received\n${help_command_message}" 1 1
+[ ! -d ~/.basher/src/"${command_name}"/cmd ] && genericException "$(color yellow)${command_name}$(color) is not a valid executable command\n${help_list_command_message}" 1 1
 command_action=${commands_array[1]}
-[ -z "$command_action" ] && [ -f ~/.basher/src/"$command_name"/cmd/default.sh ] && command_action="default"
-[ -z "$command_action" ] && echo -e "\n$(color red)Execution Exception:$(color) No valid action received for $(color yellow)$command_name$(color) command\nUse $(color yellow)basher help $command_name$(color) to know how to use it\n" && exit 1
-[ ! -f ~/.basher/src/"$command_name"/cmd/"$command_action".sh ] && echo -e "\n$(color red)Execution Exception:$(color) Command $(color yellow)basher $command_name:$command_action$(color) not found\nUse $(color yellow)basher help $command_name$(color) to read more about it\n" && exit 1
+[ -z "${command_action}" ] && [ -f ~/.basher/src/"${command_name}"/cmd/default.sh ] && command_action="default"
+[ -z "${command_action}" ] && genericException "No valid action received for $(color yellow)${command_name}$(color) command\n$(commandHelpInfoMessage "${command_name}" 0 0)" 1 1
+[ ! -f ~/.basher/src/"${command_name}"/cmd/"${command_action}".sh ] && genericException "Command $(color yellow)basher ${command_name}:${command_action}$(color) not found\n$(commandHelpInfoMessage "${command_name}" 0 0)" 1 1
 command_options=$(pruneFlag $1 $*)
 
 # Send command
-~/.basher/src/"$command_name"/cmd/"$command_action".sh $command_options
+~/.basher/src/"${command_name}"/cmd/"${command_action}".sh $command_options
