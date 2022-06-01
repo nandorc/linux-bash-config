@@ -63,3 +63,21 @@ Provides commands to manage mysql service.
 > `--compact`
 >
 > > It controls when to supress additional information messages.
+
+`basher mysql:install [?options]`
+
+> Installs mysql service
+>
+> [?options]
+>
+> `--force`
+>
+> > It controls when to forced install service.
+>
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
+>
+> `--compact`
+>
+> > It controls when to supress additional information messages.
