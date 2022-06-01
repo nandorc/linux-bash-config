@@ -69,3 +69,21 @@ Provides variables, aliases and commands to manage apache2 service.
 > `--compact`
 >
 > > It controls when to supress additional information messages.
+
+`basher apache:install [?options]`
+
+> Installs apache service
+>
+> [?options]
+>
+> `--force`
+>
+> > It controls when to forced install service.
+>
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
+>
+> `--compact`
+>
+> > It controls when to supress additional information messages.
