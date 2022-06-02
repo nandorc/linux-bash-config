@@ -81,6 +81,25 @@ else
     fi
 fi
 
+# Change permissions for mysqld run folder
+if [ ! -d /run/mysqld ]; then
+    genericWarnMessage "Run folder for mysqld doesn't exists" 0 0
+    sudo echo -e "$(genericExecutionMessage "Trying to create mysqld run folder..." 0 0)\c"
+    if [ $? -eq 0 ]; then
+        tmp=$(sudo mkdir -p /run/mysqld)
+        responseString $?
+    else
+        noSudoPrivilegesException 0 "${spaces}"
+    fi
+fi
+sudo echo -e "$(genericExecutionMessage "Trying to set permissions to mysqld run folder..." 0 0)\c"
+if [ $? -eq 0 ]; then
+    tmp=$(sudo chown mysql:mysql /run/mysqld) && tmp=$(sudo chmod 755 /run/mysqld)
+    responseString $?
+else
+    noSudoPrivilegesException 0 "${spaces}"
+fi
+
 # Restart apache service
 basher mysql:restart --no-spaces --compact
 [ ${spaces} -eq 1 ] && echo ""
