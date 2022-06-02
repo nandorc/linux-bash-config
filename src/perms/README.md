@@ -8,9 +8,9 @@ By default it assign **2775** access to folders, **0664** access to files and **
 
 ## Commands
 
-`basher perms [?options] [path]`
+`basher perms [?options] [paths...]`
 
-> If [path] is not defined or refers to a no existent file or folder path, an error will be displayed.
+> If [paths...] are not defined or refers to not existent file or folder path, an error will be displayed.
 
 ## Options
 
