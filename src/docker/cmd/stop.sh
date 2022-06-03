@@ -1,15 +1,26 @@
 #!/bin/bash
 
-# Dependencies
-source ~/.basher/lib/wrapper.sh
+# Load dependencies
+source ~/.basher/lib/messagehandler.sh
+source ~/.basher/lib/flaghandler.sh
 
-serviceName="docker"
-options=$(getRebuildedOptions $*)
-printColoredMessage "Stoping $serviceName service..." --wrap-position begin $options
-if [ $(basher $serviceName:status --output bool) -eq 0 ]; then
-    printMessage " * $serviceName service is currently stopped" --wrap-position end --no-color $options
+# Check parameters
+declare service_name options spaces is_compact tmp res_cod
+service_name=docker
+options=$*
+spaces=$(hasFlag --no-spaces ${options}) && options=$(pruneFlag --no-spaces ${options})
+[ ${spaces} -eq 1 ] && spaces=0 || spaces=1
+is_compact=$(hasFlag --compact ${options}) && options=$(pruneFlag --compact ${options})
+[ -n "${options}" ] && noValidOptionsException "${service_name}" "${spaces}" "${spaces}"
+
+# Check and stop service if necessary
+[ $(basher "${service_name}":status --output bool) -eq 0 ] && genericInfoMessage "${service_name} service is currently stopped" "${spaces}" "${spaces}" 0 0 && exit 0
+mayNeedSudoMessage "${spaces}" 0 "${is_compact}"
+sudo echo -e "$(genericExecutionMessage "Trying to stop ${service_name} service..." 0 0)\c"
+if [ $? -eq 0 ]; then
+    tmp=$(sudo service docker stop 2>&1)
+    res_cod=$?
+    wrap "$(responseString ${res_cod})" 0 "${spaces}" 0 0 && exit ${res_cod}
 else
-    sudo service docker stop
-    printColoredMessage " * $serviceName service stopped" --wrap-position end --no-color $options
+    noSudoPrivilegesException 0 ${spaces}
 fi
-unset serviceName options
