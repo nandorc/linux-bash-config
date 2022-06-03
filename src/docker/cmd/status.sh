@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # Load dependencies
 source ~/.basher/lib/messagehandler.sh
 source ~/.basher/lib/flaghandler.sh
