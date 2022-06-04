@@ -1,59 +1,75 @@
 # basher magento
 
-Provides commands to manage a Magento environment (apache, mysql and elasticsearch)
+Provides commands to manage a Magento environment (apache, mysql, docker and elasticsearch).
 
 ## Commands
 
 `basher magento:status [?options]`
 
-> Shows magento services status
+> Shows Magento services status
 >
 > [?options]
 >
-> `--output type`
+> `--no-spaces`
 >
-> > Set the expected output type.
-> >
-> > It must be 'string' or 'bool'.
-> >
-> > If nothing sent, 'string' will be used as default.
-> >
-> > When using 'string' output type, `--no-color` and `--spacing` options may be used.
+> > It controls when to supress from adding before and after blank rows on response.
 
 `basher magento:start [?options]`
 
-> Starts magento services
+> Starts Magento services
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
+>
+> `--compact`
+>
+> > It controls when to supress additional information messages.
 
 `basher magento:stop [?options]`
 
-> Stops magento services
+> Stops Magento services
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
+>
+> `--compact`
+>
+> > It controls when to supress additional information messages.
 
 `basher magento:restart [?options]`
 
-> Restarts magento services
+> Restarts Magento services
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
-
-## Common [?options]
-
-`--no-color`
-
-> Points to not use colors on messages.
-
-`--spacing [spacing]`
-
-> Referes to blank lines to be used around command execution messages.
+> `--no-spaces`
 >
-> Spacing must be 'none', 'before', 'after' or 'both'.
+> > It controls when to supress from adding before and after blank rows on response.
 >
-> 'both' is used by default.
+> `--compact`
+>
+> > It controls when to supress additional information messages.
+
+`basher magento:install [?options]`
+
+> Installs Magento services
+>
+> [?options]
+>
+> `--force`
+>
+> > It controls when to forced install services.
+>
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
+>
+> `--compact`
+>
+> > It controls when to supress additional information messages.
