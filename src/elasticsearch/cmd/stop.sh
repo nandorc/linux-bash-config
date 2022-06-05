@@ -1,37 +1,20 @@
 #!/bin/bash
 
-# Dependencies
-source ~/.basher/lib/wrapper.sh
+# Load dependencies
+source ~/.basher/lib/messagehandler.sh
+source ~/.basher/lib/flaghandler.sh
 
-options=$(getRebuildedOptions $*)
-printColoredMessage "Stoping elasticsearch service..." --wrap-position begin $options
-rm -f ~/.basher/src/elasticsearch/var/warning && touch ~/.basher/src/elasticsearch/var/warning && warning=""
-if [ $(basher elasticsearch:status --output bool) -eq 0 ]; then
-    printMessage " * elasticsearch service is currently stopped or not reachable"
-elif [ ! -f ~/.basher/src/elasticsearch/var/pid ]; then
-    warning=" * stopping elasticsearch service fails because it wasn't started by basher"
-else
-    javaServices=$(pgrep java) && javaServicesArray=(${javaServices// / })
-    if [ -z "$javaServices" ]; then
-        warning=" * no java services currently running so basher isn't able to stop elasticsearch service"
-    else
-        servicePid=$(cat ~/.basher/src/elasticsearch/var/pid) && serviceFound=0
-        for i in "${javaServicesArray[@]}"; do
-            [ "$i" = "$servicePid" ] && serviceFound=1 && break
-        done
-        if [ $serviceFound -eq 0 ]; then
-            warning=" * elasticsearch service pid doesn't match so basher isn't able to stop it"
-        else
-            pkill -F ~/.basher/src/elasticsearch/var/pid
-            while [ $(basher elasticsearch:status --output bool) -eq 1 ]; do
-                sleep 2
-            done
-            rm -f ~/.basher/src/elasticsearch/var/pid
-            printColoredMessage " * elasticsearch service stopped" --wrap-position end --no-color $options
-        fi
-        unset servicePid serviceFound
-    fi
-    unset javaServices javaServicesArray
-fi
-[ -n "$warning" ] && echo "$warning" >>~/.basher/src/elasticsearch/var/warning && printColoredMessage "$warning" --type warning --wrap-position end $(pruneFlag --no-color $options)
-unset options warning
+# Check parameters
+declare service_name options spaces is_compact tmp res_cod
+service_name=elasticsearch
+options=$*
+spaces=$(hasFlag --no-spaces ${options}) && options=$(pruneFlag --no-spaces ${options})
+[ ${spaces} -eq 1 ] && spaces=0 || spaces=1
+[ -n "${options}" ] && noValidOptionsException "${service_name}" "${spaces}" "${spaces}"
+
+# Check and start service if necessary
+[ $(basher "${service_name}":status --output bool) -eq 0 ] && genericInfoMessage "${service_name} service is currently stopped" "${spaces}" "${spaces}" && exit 0
+genericExecutionMessage "Trying to stop ${service_name} service...\c" "${spaces}" 0
+tmp=$(docker container stop elasticsearch7.10 2>&1)
+res_cod=$?
+wrap "$(responseString ${res_cod})" 0 "${spaces}" 0 0 && exit ${res_cod}

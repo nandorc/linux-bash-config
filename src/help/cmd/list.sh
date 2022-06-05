@@ -1,18 +1,28 @@
 #!/bin/bash
 
-# Dependencies
-source ~/.basher/lib/messages.sh
+# Load dependencies
+source ~/.basher/lib/messagehandler.sh
 
-# BEGIN
-printInfoMessage "Available basher commands and components" before
+# Define variables
+declare commands home_dir command fixed_command
+
+# Show title
+commandBlockHeading "AVAILABLE BASHER COMMANDS AND COMPONENTS" 1 0
 commands=$(find ~/.basher/src/* -maxdepth 0 -type d)
-commandsArray=(${commands// / })
-homeDir=~/.basher/src/
-for i in "${commandsArray[@]}"; do
-    command=$(echo $i | sed -e "s|$homeDir||g")
-    message="$command\t"
-    [ ${#command} -lt 8 ] && message="$message\t"
-    printMessage "$message:\tFor complete reference type 'basher help $command'"
+commands=(${commands// / })
+home_dir=~/.basher/src/
+echo -e "$(color cyan)           name : [CMD] : reference$(color)"
+for command in "${commands[@]}"; do
+    command=$(echo ${command} | sed -e "s|${home_dir}||g") && fixed_command=${command}
+    while [ ${#fixed_command} -lt 15 ]; do
+        fixed_command=" ${fixed_command}"
+    done
+    echo -e "${fixed_command} :\c"
+    if [ -d ~/.basher/src/"${command}"/cmd ]; then
+        echo -e "$(color green)  YES  $(color)\c"
+    else
+        echo -e "$(color red)  NO   $(color)\c"
+    fi
+    echo -e ": $(color yellow)basher help ${command}$(color)"
 done
 echo ""
-unset commands commandsArray homeDir i command message

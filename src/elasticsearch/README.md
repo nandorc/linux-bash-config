@@ -1,12 +1,8 @@
 # basher elasticsearch
 
-Provides commands to manage elasticsearch service.
+Provides commands to manage elasticsearch service. Installer is based on [Elasticsearch installation instructions for docker](https://www.elastic.co/guide/en/elasticsearch/reference/7.10/elasticsearch.html)
 
 ## Commands
-
-`basher elasticsearch:set-path [path]`
-
-> Ask for elasticsearch root folder [path] and store it.
 
 `basher elasticsearch:status [?options]`
 
@@ -14,15 +10,17 @@ Provides commands to manage elasticsearch service.
 >
 > [?options]
 >
-> `--output type`
+> `--output [type]`
 >
 > > Set the expected output type.
 > >
 > > It must be 'string', 'response' or 'bool'.
 > >
-> > If nothing sent, 'string' will be used as default.
-> >
-> > When using 'string' or 'response' output types, `--no-color` and `--spacing` options may be used.
+> > If isn't sent or is sent with an empty or invalid value, 'string' will be used.
+>
+> `--no-spaces`
+>
+> > When --output is string or response, it may control when to supress from adding before and after blank rows on response.
 
 `basher elasticsearch:start [?options]`
 
@@ -30,7 +28,9 @@ Provides commands to manage elasticsearch service.
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
 
 `basher elasticsearch:stop [?options]`
 
@@ -38,7 +38,9 @@ Provides commands to manage elasticsearch service.
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
 
 `basher elasticsearch:restart [?options]`
 
@@ -46,18 +48,24 @@ Provides commands to manage elasticsearch service.
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
-
-## Common [?options]
-
-`--no-color`
-
-> Points to not use colors on messages.
-
-`--spacing [spacing]`
-
-> Referes to blank lines to be used around command execution messages.
+> `--no-spaces`
 >
-> Spacing must be 'none', 'before', 'after' or 'both'.
+> > It controls when to supress from adding before and after blank rows on response.
+
+`basher elasticsearch:install [?options]`
+
+> Installs elasticsearch service
 >
-> 'both' is used by default.
+> [?options]
+>
+> `--force`
+>
+> > It controls when to forced install service.
+>
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
+>
+> `--compact`
+>
+> > It controls when to supress additional information messages.

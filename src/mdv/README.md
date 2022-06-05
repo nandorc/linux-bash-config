@@ -4,10 +4,6 @@ This command allows to display Markdown files using pandoc or less.
 
 ## Commands
 
-`basher mdv --reset`
-
-> Re-define setted value for use_pandoc variable at config.ini file in order to specify if pandoc must be used as Markdown files formatter.
-
 `basher mdv [path]`
 
 `basher mdv --reset [path]`

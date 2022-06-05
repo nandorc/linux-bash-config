@@ -2,56 +2,47 @@
 
 # Get a variable from a .ini file.
 #   In case variable or .ini file doesn't exists returns 'undefined'.
-# $1 .ini file path
-# $2 variable name
+# $1 file_path - .ini file path
+# $2 var_name - variable name
 function getINIVar() {
-    if [ ! -f "$1" ] || [ -z "$(cat "$1" | grep "^$2=")" ]; then
+    declare file_path var_name var_string
+    file_path=$1 && var_name=$2 && var_string=$(cat "${file_path}" |& grep "^${var_name}=")
+    if [ ! -f "${file_path}" ] || [ -z "${var_string}" ]; then
         echo "undefined"
     else
-        echo $(cat "$1" | grep "^$2=" | sed -e "s/$2=//")
+        echo "${var_string}" | sed -e "s|${var_name}=||"
     fi
-}
-
-# List current variables defined at .ini file
-# $1 .ini file path
-function getAllINIVars() {
-    if [ ! -f "$1" ]; then
-        echo -e "\nNo file found holding any variable at '$1'.\n"
-    else
-        echo -e "\nDEFINED VARIABLES"
-        cat "$1"
-        echo ""
-    fi
+    return 0
 }
 
 # Set a variable on an .ini file.
-# $1 .ini file path
-# $2 variable name.
-# $3 [Optional] variable value. If not defined is set to an empty value.
+# $1 file_path - .ini file path
+# $2 var_name - variable name.
+# $3 var_value - [Optional] variable value. If not defined is set to an empty value.
 function setINIVar() {
-    if [ ! -f "$1" ]; then
-        touch "$1"
+    declare file_path var_name var_value current_value tmp
+    file_path=$1 && var_name=$2 && var_value=$3
+    if [ ! -f "${file_path}" ]; then
+        tmp=$(touch "${file_path}" 2>&1)
+        [ $? -ne 0 ] && return 1
     fi
-    current_value=$(getINIVar "$1" "$2")
-    if [ "$current_value" = "undefined" ]; then
-        echo "$2=$3" >>"$1"
+    current_value=$(getINIVar "${file_path}" "${var_name}")
+    if [ "${current_value}" = "undefined" ]; then
+        echo "${var_name}=${var_value}" >>"${file_path}"
     else
-        sed -i -e "s|$2=\(.*\)|$2=$3|" "$1"
+        sed -i -e "s|${var_name}=\(.*\)|${var_name}=${var_value}|" "${file_path}"
     fi
-    unset current_value
+    return 0
 }
 
 # Drop a defined variable
-# $1 .ini file path
-# $2 variable name
-# returns
-#   0 : Nothing to drop
-#   1 : Drop was done
+# $1 file_path - .ini file path
+# $2 var_name - variable name
 function dropINIVar() {
-    if [ "$(getINIVar "$1" "$2")" = "indefined" ]; then
-        echo 0
-    else
-        sed -i "\!$2=!d" "$1"
-        echo 1
-    fi
+    declare file_path var_name current_value
+    file_path=$1 && var_name=$2
+    [ ! -f "${file_path}" ] && return 1
+    current_value=$(getINIVar "${file_path}" "$var_name")
+    [ "${current_value}" != "undefined" ] && sed -i "\!${var_name}=!d" "${file_path}"
+    return 0
 }

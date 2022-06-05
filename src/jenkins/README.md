@@ -1,6 +1,6 @@
 # basher jenkins
 
-Provides commands to manage jenkins service.
+Provides commands to manage jenkins service. Installer is based on [Jenkins installation instructions for docker](https://www.jenkins.io/doc/book/installing/docker/)
 
 ## Aliases
 
@@ -18,15 +18,17 @@ Provides commands to manage jenkins service.
 >
 > [?options]
 >
-> `--output type`
+> `--output [type]`
 >
 > > Set the expected output type.
 > >
 > > It must be 'string' or 'bool'.
 > >
-> > If nothing sent, 'string' will be used as default.
-> >
-> > When using 'string' output type, `--no-color` and `--spacing` options may be used.
+> > If isn't sent or is sent with an empty or invalid value, 'string' will be used.
+>
+> `--no-spaces`
+>
+> > When --output is string, it may control when to supress from adding before and after blank rows on response.
 
 `basher jenkins:start [?options]`
 
@@ -34,7 +36,9 @@ Provides commands to manage jenkins service.
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
 
 `basher jenkins:stop [?options]`
 
@@ -42,7 +46,9 @@ Provides commands to manage jenkins service.
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
 
 `basher jenkins:restart [?options]`
 
@@ -50,18 +56,30 @@ Provides commands to manage jenkins service.
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
-
-## Common [?options]
-
-`--no-color`
-
-> Points to not use colors on messages.
-
-`--spacing [spacing]`
-
-> Referes to blank lines to be used around command execution messages.
+> `--no-spaces`
 >
-> Spacing must be 'none', 'before', 'after' or 'both'.
+> > It controls when to supress from adding before and after blank rows on response.
+
+`basher jenkins:install [?options]`
+
+> Installs jenkins service
 >
-> 'both' is used by default.
+> [?options]
+>
+> `--force`
+>
+> > It controls when to forced install service.
+>
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
+
+## Usage
+
+In order to unlock jenkins for being able to use it, you must need `initialAdminPassword` which can be obtained executing the following command.
+
+~~~bash
+#!bin/bash
+
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword | clip
+~~~

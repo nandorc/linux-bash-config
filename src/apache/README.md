@@ -6,17 +6,7 @@ Provides variables, aliases and commands to manage apache2 service.
 
 `$webserver`
 
-> Change location to main webserver directory (the directory used for apache to store sites by default).
-
-`$localhost`
-
-> Change location to default apache site directory.
-
-## Aliases
-
-`localhost`
-
-> Shows on deafult web browser the default site for apache (http://localhost).
+> Stores location of main webserver directory (the directory used for apache to store sites by default).
 
 ## Commands
 
@@ -26,15 +16,17 @@ Provides variables, aliases and commands to manage apache2 service.
 >
 > [?options]
 >
-> `--output type`
+> `--output [type]`
 >
 > > Set the expected output type.
 > >
 > > It must be 'string' or 'bool'.
 > >
-> > If nothing sent, 'string' will be used as default.
-> >
-> > When using 'string' output type, `--no-color` and `--spacing` options may be used.
+> > If isn't sent or is sent with an empty or invalid value, 'string' will be used.
+>
+> `--no-spaces`
+>
+> > Only when --output is string, it may control when to supress from adding before and after blank rows on response.
 
 `basher apache:start [?options]`
 
@@ -42,7 +34,13 @@ Provides variables, aliases and commands to manage apache2 service.
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
+>
+> `--compact`
+>
+> > It controls when to supress additional information messages.
 
 `basher apache:stop [?options]`
 
@@ -50,7 +48,13 @@ Provides variables, aliases and commands to manage apache2 service.
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
+>
+> `--compact`
+>
+> > It controls when to supress additional information messages.
 
 `basher apache:restart [?options]`
 
@@ -58,18 +62,28 @@ Provides variables, aliases and commands to manage apache2 service.
 >
 > [?options]
 >
-> > `--no-color` and `--spacing` may be used to controls message behaviour.
-
-## Common [?options]
-
-`--no-color`
-
-> Points to not use colors on messages.
-
-`--spacing [spacing]`
-
-> Referes to blank lines to be used around command execution messages.
+> `--no-spaces`
 >
-> Spacing must be 'none', 'before', 'after' or 'both'.
+> > It controls when to supress from adding before and after blank rows on response.
 >
-> 'both' is used by default.
+> `--compact`
+>
+> > It controls when to supress additional information messages.
+
+`basher apache:install [?options]`
+
+> Installs apache service
+>
+> [?options]
+>
+> `--force`
+>
+> > It controls when to forced install service.
+>
+> `--no-spaces`
+>
+> > It controls when to supress from adding before and after blank rows on response.
+>
+> `--compact`
+>
+> > It controls when to supress additional information messages.

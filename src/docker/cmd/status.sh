@@ -1,30 +1,27 @@
 #!/bin/bash
 
-# Dependencies
-source ~/.basher/lib/wrapper.sh
+# Load dependencies
+source ~/.basher/lib/messagehandler.sh
+source ~/.basher/lib/flaghandler.sh
 
-output=$(getFlagValue --output $*)
-if [ $(hasFlag --output $*) -eq 1 ] && [ -n "$output" ] && [ "$output" != "string" ] && [ "$output" != "bool" ]; then
-    printErrorMessage "No valid --output value received" both
-else
-    [ -z "$output" ] && output="string"
-    # Begin boolean service validation
-    boolResult=1
-    if [[ "$(service docker status)" =~ "is not running" ]]; then
-        boolResult=0
-    fi
-    if [ "$output" = "bool" ]; then
-        echo $boolResult
-    else
-        # Begin string result
-        serviceName="docker"
-        options=$(getRebuildedOptions $*)
-        printColoredMessage "Checking $serviceName service status..." --wrap-position begin $options
-        stringResult=" * $serviceName service is not running"
-        [ $boolResult -eq 1 ] && stringResult=" * $serviceName is running"
-        printColoredMessage "$stringResult" --wrap-position end --no-color $options
-        unset serviceName options stringResult
-    fi
-    unset boolResult
-fi
-unset output
+# Check parameters
+declare service_name options output spaces bool_status is_running
+service_name=docker
+options=$*
+output=$(getFlagValue --output ${options}) && options=$(pruneFlagValue --output ${options})
+[ "${output}" != "string" ] && [ "${output}" != "bool" ] && output=string
+spaces=$(hasFlag --no-spaces ${options}) && options=$(pruneFlag --no-spaces ${options})
+[ ${spaces} -eq 1 ] && spaces=0 || spaces=1
+[ -n "${options}" ] && noValidOptionsException "${service_name}" "${spaces}" "${spaces}"
+
+# Get boolean service status
+is_running=$(service docker status |& grep "is running")
+[ -z "${is_running}" ] && is_running=$(service docker status |& grep "Active: active (running)")
+[ -z "${is_running}}" ] && bool_status=0 || bool_status=1
+
+# Return bool status if requested
+[ "${output}" = "bool" ] && echo ${bool_status} && exit
+
+# Return string status
+[ ${bool_status} -eq 1 ] && wrap "$(color green)[RUNNING] $(color)\c" "${spaces}" 0 0 0 || wrap "$(color red)[STOPED]  $(color)\c" "${spaces}" 0 0 0
+wrap "$(color cyan) ${service_name} service$(color)" 0 ${spaces} 0 0
