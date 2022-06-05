@@ -1,6 +1,6 @@
-# Basher for Linux v3.2
+# Basher for Linux v4.0.0
 
-This repository is intended to provide a simple way to customize linux terminal behaviour and give linux users tools to execute some administration tasks easy. It was tested on WSL at distro **Ubuntu 20.04**
+This repository is intended to provide a simple way to customize linux terminal behaviour and give linux users tools to execute some administration tasks easy. It was tested on WSL at distro **Ubuntu** which refers to **Ubuntu focal 20.04.4 LTS**.
 
 ## Installation
 
@@ -13,7 +13,7 @@ In order to install this tool, you must clone it at user directory (~) inside a 
 cd ~
 
 # Clone basher for linux at .basher folder
-git clone -b master https://github.com/nandorc/linux-basher.git .basher
+git clone -b v4.0.0 https://github.com/nandorc/linux-basher.git .basher
 
 # Execute tool setup
 ~/.basher/setup.sh
