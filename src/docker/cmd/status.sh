@@ -5,7 +5,7 @@ source ~/.basher/lib/messagehandler.sh
 source ~/.basher/lib/flaghandler.sh
 
 # Check parameters
-declare service_name options output spaces bool_status
+declare service_name options output spaces bool_status is_running
 service_name=docker
 options=$*
 output=$(getFlagValue --output ${options}) && options=$(pruneFlagValue --output ${options})
@@ -15,7 +15,9 @@ spaces=$(hasFlag --no-spaces ${options}) && options=$(pruneFlag --no-spaces ${op
 [ -n "${options}" ] && noValidOptionsException "${service_name}" "${spaces}" "${spaces}"
 
 # Get boolean service status
-[ -z "$(service docker status | grep "is running")" ] && bool_status=0 || bool_status=1
+is_running=$(service docker status |& grep "is running")
+[ -z "${is_running}" ] && is_running=$(service docker status |& grep "Active: active (running)")
+[ -z "${is_running}}" ] && bool_status=0 || bool_status=1
 
 # Return bool status if requested
 [ "${output}" = "bool" ] && echo ${bool_status} && exit

@@ -16,6 +16,7 @@ spaces=$(hasFlag --no-spaces ${options}) && options=$(pruneFlag --no-spaces ${op
 
 # Get boolean service status
 is_running=$(service apache2 status |& grep "is running")
+[ -z "${is_running}" ] && is_running=$(service apache2 status |& grep "Active: active (running)")
 [ -z "${is_running}" ] && bool_status=0 || bool_status=1
 
 # Return bool status if requested
