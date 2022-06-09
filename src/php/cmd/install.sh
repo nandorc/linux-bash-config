@@ -5,7 +5,7 @@ source ~/.basher/lib/flaghandler.sh
 source ~/.basher/lib/messagehandler.sh
 
 # Declare variables
-declare service_name options must_force spaces is_compact is_installed is_correct_version installed_version tmp res_cod settings setting ini_file_dir current_value
+declare service_name options must_force spaces is_compact is_installed is_correct_version installed_version tmp res_cod settings setting ini_file_dir current_value modules module
 
 # Check options
 service_name=php
@@ -35,22 +35,35 @@ if [ ${is_installed} -eq 0 ] || [ ${is_correct_version} -eq 0 ]; then
     if [ ${is_correct_version} -eq 0 ]; then
         sudo echo -e "$(genericExecutionMessage "Trying to remove PHP version installed..." 0 0)\c"
         if [ $? -eq 0 ]; then
-            tmp=$(sudo apt-get -y purge php* 2>&1) && tmp=$(sudo apt-get -y autoremove 2>&1)
-            res_cod=$?
-            responseString ${res_cod}
-            [ ${res_cod} -ne 0 ] && genericException "PHP couldn't be removed so install process was aborted" 0 "${spaces}"
+            # Remove old versions
+            tmp=$(sudo apt-get -y purge php* 2>&1) && tmp=$(sudo apt-get -y purge php7* 2>&1) && tmp=$(sudo apt-get -y purge php8* 2>&1) && tmp=$(sudo apt-get -y autoremove 2>&1)
+            res_cod=$? && [ ${res_cod} -ne 0 ] && responseString "${res_cod}" && genericException "PHP couldn't be removed so install process was aborted" 0 "{spaces}"
+            # Remove php folder
+            tmp=$(sudo rm -rf /etc/php 2>&1)
+            res_cod=$? && [ ${res_cod} -ne 0 ] && responseString "${res_cod}" && genericException "PHP folder couldn't be removed so install process was aborted" 0 "{spaces}"
+            responseString "${res_cod}"
         else
             noSudoPrivilegesException 0 "${spaces}"
         fi
     fi
     sudo echo -e "$(genericExecutionMessage "Trying to install PHP v7.4.x..." 0 0)\c"
     if [ $? -eq 0 ]; then
-        tmp=$(sudo apt-get update 2>&1) && tmp=$(sudo apt-get -y install php7.4 2>&1)
-        responseString $?
-        installed_version=$(php -v 2>&1)
-        [ $? -eq 0 ] && is_installed=1
-        [ ${is_installed} -eq 0 ] && genericException "PHP couldn't be installed" 0 "${spaces}"
-        [ -z "$(echo "${installed_version}" | grep "PHP 7.4")" ] && genericException "PHP was installed but version isn't v7.4.x" 0 "${spaces}"
+        # Actualizar listado de paquetes
+        tmp=$(sudo apt-get update 2>&1)
+        res_cod=$? && [ ${res_cod} -ne 0 ] && responseString "${res_cod}" && genericException "$(color cyan)apt$(color) packages can't be updated" 0 "{spaces}"
+        # Install/Update needed packages
+        tmp=$(sudo apt-get -y install software-properties-common 2>&1)
+        res_cod=$? && [ ${res_cod} -ne 0 ] && responseString "${res_cod}" && genericException "Needed packages can't be installed or updated" 0 "{spaces}"
+        # Add php and apache repositories
+        tmp=$(sudo add-apt-repository -y ppa:ondrej/php 2>&1) && tmp=$(sudo add-apt-repository -y ppa:ondrej/apache2 2>&1) && tmp=$(sudo apt-get update 2>&1)
+        res_cod=$? && [ ${res_cod} -ne 0 ] && responseString "${res_cod}" && genericException "Needed repositories can't be included" 0 "{spaces}"
+        # Install PHP version
+        tmp=$(sudo apt-get -y install php7.4 2>&1)
+        res_cod=$? && [ ${res_cod} -ne 0 ] && responseString "${res_cod}" && genericException "PHP can't be installed" 0 "{spaces}"
+        tmp=$(php -v 2>&1)
+        res_cod=$? && [ ${res_cod} -ne 0 ] && responseString "${res_cod}" && genericException "PHP install check failed" 0 "{spaces}"
+        [ -z "$(echo "${tmp}" | grep "PHP 7.4")" ] && responseString "${res_cod}" && genericException "PHP was installed but version isn't v7.4.x" 0 "${spaces}"
+        responseString "${res_cod}"
     else
         noSudoPrivilegesException 0 "${spaces}"
     fi
@@ -59,18 +72,21 @@ else
 fi
 
 # Intall recommended modules
-sudo echo -e "$(genericExecutionMessage "Trying to install recommended PHP modules..." 0 0)\c"
-if [ $? -eq 0 ]; then
-    tmp=$(sudo apt-get -y install php7.4-bcmath php7.4-common php7.4-curl php7.4-xml php7.4-gd php7.4-intl php7.4-json php7.4-mbstring php7.4-mysql php7.4-soap php7.4-zip)
-    responseString $?
-else
-    noSudoPrivilegesException 0 "${spaces}"
-fi
+modules=(php7.4-bcmath php7.4-common php7.4-curl php7.4-xml php7.4-gd php7.4-intl php7.4-json php7.4-mbstring php7.4-mysql php7.4-soap php7.4-zip php7.4-imagick php7.4-mcrypt php7.4-ssh2 php-mysql)
+for module in "${modules[@]}"; do
+    sudo echo -e "$(genericExecutionMessage "Trying to install/update $(color cyan)${module}$(color) package..." 0 0)\c"
+    if [ $? -eq 0 ]; then
+        tmp=$(sudo apt-get -y install "${module}" 2>&1)
+        responseString $?
+    else
+        noSudoPrivilegesException 0 "${spaces}"
+    fi
+done
 
 # Set recommended configurations
 ini_file_dir=/etc/php/7.4/apache2/php.ini
 [ ! -f "${ini_file_dir}" ] && genericException "Can't find php.ini file to set recommended configurations" 0 "${spaces}"
-settings=("date.timezone=America/Bogota" "memory_limit=2G" "realpath_cache_size=10M" "realpath_cache_ttl=7200" "opcache.save_comments=1")
+settings=("date.timezone=America/Bogota" "max_execution_time=120" "memory_limit=2G" "post_max_size=64M" "upload_max_filesize=64M" "max_input_time=60" "max_input_vars=3000" "realpath_cache_size=10M" "realpath_cache_ttl=7200" "opcache.save_comments=1")
 for setting in "${settings[@]}"; do
     setting=(${setting//=/ })
     current_value=$(cat "${ini_file_dir}" | grep "^${setting[0]}")
