@@ -4,7 +4,7 @@ This tool allow users to manage files and folders permissions and ownership base
 
 It needs **sudo** privileges to be executed.
 
-By default it assign **2775** access to folders, **0664** access to files and **0774** access to executable files.
+By default it assign **2775** access to folders, **0664** access to files and **0775** access to executable files.
 
 ## Commands
 
@@ -36,4 +36,4 @@ By default it assign **2775** access to folders, **0664** access to files and **
 
 `--exe [permission]`
 
-> Set the value assigned for executable files when setting permissions. If `--defaults` flag is sent and `--exe` option is not setted executable files take **0774** permission.
+> Set the value assigned for executable files when setting permissions. If `--defaults` flag is sent and `--exe` option is not setted executable files take **0775** permission.
