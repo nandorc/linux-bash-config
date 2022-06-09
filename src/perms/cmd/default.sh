@@ -24,7 +24,7 @@ done
 # Replace values by defaults if necessary
 [ ${use_defaults} -eq 1 ] && [ -z "${filperm}" ] && filperm=0664
 [ ${use_defaults} -eq 1 ] && [ -z "${dirperm}" ] && dirperm=2775
-[ ${use_defaults} -eq 1 ] && [ -z "${exeperm}" ] && exeperm=0774
+[ ${use_defaults} -eq 1 ] && [ -z "${exeperm}" ] && exeperm=0775
 
 # Apply permissions on selected paths
 clear
