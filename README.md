@@ -1,4 +1,4 @@
-# Basher for Linux v4.1.0
+# Basher for Linux v4.1.1
 
 This repository is intended to provide a simple way to customize linux terminal behaviour and give linux users tools to execute some administration tasks easy. It was tested on WSL at distro **Ubuntu** which refers to **Ubuntu focal 20.04.4 LTS**.
 
@@ -13,7 +13,7 @@ In order to install this tool, you must clone it at user directory (~) inside a 
 cd ~
 
 # Clone basher for linux at .basher folder
-git clone -b v4.1.0 https://github.com/nandorc/linux-basher.git .basher
+git clone https://github.com/nandorc/linux-basher.git .basher
 
 # Execute tool setup
 ~/.basher/setup.sh
@@ -31,3 +31,10 @@ Basher for Linux stands on `basher` command. The most basic instruction to send 
 # Request for first use information about basher command
 basher help
 ```
+
+## TODO
+
+- [ ] Include wp-cli installation as a part of the tool. See [wp-cli](https://wp-cli.org/).
+- [ ] Include db-tools as part of the tool.
+- [ ] Open posibility to set custom ENV variables to be set on start
+- [ ] Open posibility to define and store custom aliases
