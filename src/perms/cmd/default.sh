@@ -27,8 +27,7 @@ done
 [ ${use_defaults} -eq 1 ] && [ -z "${exeperm}" ] && exeperm=0775
 
 # Apply permissions on selected paths
-clear
-mayNeedSudoMessage 0 1 0
+mayNeedSudoMessage 1 1 0
 for selected_path in "${selected_paths[@]}"; do
     commandBlockHeading "BASHER PERMS EXECUTION FOR ${selected_path}" 0 0
     # set ownership
